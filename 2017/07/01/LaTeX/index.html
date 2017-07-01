@@ -15,31 +15,13 @@
     <meta name="keywords" content="Latex," />
   
 
-  <meta name="description" content="LaTeX最强大的功能就是显示美丽的数学公式，下面我们来看看这些公式是怎么实现的
-
-1、基本格式
-数学公式的前后要加上 $ 或 \( 和 \), 比如$f(x) = 3x + 7$和\(f(x) = 3x + 7\), 效果是一样的
-如果用 \[ 和 \], 或者使用 $$ 和 $$, 则公式独占一行
-如果用 \begin{equation} 和 \end{equation}, 则公式除了独占一行">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="latex">
 <meta property="og:url" content="http://yoursite.com/2017/07/01/latex/index.html">
 <meta property="og:site_name" content="Memphis">
-<meta property="og:description" content="LaTeX最强大的功能就是显示美丽的数学公式，下面我们来看看这些公式是怎么实现的
-
-1、基本格式
-数学公式的前后要加上 $ 或 \( 和 \), 比如$f(x) = 3x + 7$和\(f(x) = 3x + 7\), 效果是一样的
-如果用 \[ 和 \], 或者使用 $$ 和 $$, 则公式独占一行
-如果用 \begin{equation} 和 \end{equation}, 则公式除了独占一行">
-<meta property="og:updated_time" content="2017-07-01T09:30:44.000Z">
+<meta property="og:updated_time" content="2017-07-01T11:32:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="latex">
-<meta name="twitter:description" content="LaTeX最强大的功能就是显示美丽的数学公式，下面我们来看看这些公式是怎么实现的
-
-1、基本格式
-数学公式的前后要加上 $ 或 \( 和 \), 比如$f(x) = 3x + 7$和\(f(x) = 3x + 7\), 效果是一样的
-如果用 \[ 和 \], 或者使用 $$ 和 $$, 则公式独占一行
-如果用 \begin{equation} 和 \end{equation}, 则公式除了独占一行">
 
   
 
@@ -185,11 +167,6 @@
 </div>
 
 
-  <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、基本格式"><span class="toc-text">1、基本格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、字符"><span class="toc-text">2、字符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、上标和下标"><span class="toc-text">3、上标和下标</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、在公式中插入文本"><span class="toc-text">4、在公式中插入文本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、分数及开方"><span class="toc-text">5、分数及开方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、省略号（3个点）"><span class="toc-text">6、省略号（3个点）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7、括号和分隔符"><span class="toc-text">7、括号和分隔符</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8、多行的数学公式"><span class="toc-text">8、多行的数学公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9、导数、极限、求和、积分"><span class="toc-text">9、导数、极限、求和、积分</span></a></li></ol>
-  </div>
-
 
 
 <div class="content content-post CENTER">
@@ -235,64 +212,7 @@
 
   <div class="article-content">
     
-      <p>LaTeX最强大的功能就是显示美丽的数学公式，下面我们来看看这些公式是怎么实现的</p>
-<hr>
-<h2 id="1、基本格式"><a href="#1、基本格式" class="headerlink" title="1、基本格式"></a><code>1、基本格式</code></h2><ul>
-<li>数学公式的前后要加上 <code>$</code> 或 <code>\(</code> 和 <code>\)</code>, 比如<code>$f(x) = 3x + 7$</code>和<code>\(f(x) = 3x + 7\)</code>, 效果是一样的</li>
-<li>如果用 <code>\[</code> 和 <code>\]</code>, 或者使用 <code>$$</code> 和 <code>$$</code>, 则公式独占一行</li>
-<li>如果用 <code>\begin{equation}</code> 和 <code>\end{equation}</code>, 则公式除了独占一行还会自动被添加序号， 如何公式不想编号则使用 <code>\begin{equation*}</code> 和 <code>\end{equation*}</code>.</li>
-</ul>
-<h2 id="2、字符"><a href="#2、字符" class="headerlink" title="2、字符"></a><code>2、字符</code></h2><ul>
-<li>普通字符在数学公式中含义一样，除了<code>#</code> <code>$</code> <code>%</code> <code>&amp;</code> <code>~</code> <code>_</code> <code>^</code> <code>\</code> <code>{</code> <code>}</code></li>
-<li>若要在数学环境中表示这些符号 <code>#</code> <code>$</code> <code>%</code> <code>&amp;</code> <code>_</code> <code>{</code> <code>}</code>，需要分别表示为<code>\#</code> <code>\$</code> <code>\%</code> <code>\&amp;</code> <code>\_</code> <code>\{</code> <code>\}</code>，即在每个字符前加上<code>\</code></li>
-</ul>
-<h2 id="3、上标和下标"><a href="#3、上标和下标" class="headerlink" title="3、上标和下标"></a><code>3、上标和下标</code></h2><ul>
-<li>用 ^ 来表示上标，用 _ 来表示下标,如果上标的内容多于一个字符，注意用 <code>{ }</code> 把上标括起来，上下标是可以嵌套的,看两个简单例子</li>
-<li><code>$$\sum_{i=1}^n a_i=0$$</code><br> $$\sum_{i=1}^n a_i=0$$</li>
-<li><code>$$f(x)=x^{x^x}$$</code><br> $$f(x)=x^{x^x}$$</li>
-</ul>
-<h2 id="4、在公式中插入文本"><a href="#4、在公式中插入文本" class="headerlink" title="4、在公式中插入文本"></a><code>4、在公式中插入文本</code></h2><ul>
-<li>在公式中插入文本可以通过 <code>\mbox{text}</code> 在公式中添加text,比如：</li>
-<li><code>$$\mbox{对任意的$x&gt;0$}, \mbox{有 }f(x)&gt;0. $$</code><br> $$\mbox{对任意的$x&gt;0$}, \mbox{有 }f(x)&gt;0. $$</li>
-</ul>
-<h2 id="5、分数及开方"><a href="#5、分数及开方" class="headerlink" title="5、分数及开方"></a><code>5、分数及开方</code></h2><ul>
-<li><code>分数</code>：<code>$$\frac{numerator}{denominator}$$</code>,如<code>$$\frac{3}{5}$$</code><br>$$\frac{3}{5}$$</li>
-<li><code>开平方</code>:<code>$$\sqrt{expression}$$</code>, 如<code>$$\sqrt{888}$$</code><br>$$\sqrt{888}$$</li>
-<li><code>开n次方</code>:<code>$$\sqrt[n]{expression}$$</code>,如<code>$$\sqrt[n]{x^2}$$</code><br>$$\sqrt[n]{x^2}$$</li>
-</ul>
-<h2 id="6、省略号（3个点）"><a href="#6、省略号（3个点）" class="headerlink" title="6、省略号（3个点）"></a><code>6、省略号（3个点）</code></h2><ul>
-<li><code>\ldots</code> 表示跟文本底线对齐的省略号,<code>\cdots</code> 表示跟文本中线对齐的省略号</li>
-<li><code>$$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$</code><br>  $$f(x_1,x_x,\ldots,x_n) = x_1^2 + x_2^2 + \cdots + x_n^2 $$</li>
-</ul>
-<h2 id="7、括号和分隔符"><a href="#7、括号和分隔符" class="headerlink" title="7、括号和分隔符"></a><code>7、括号和分隔符</code></h2><ul>
-<li><code>( )</code> 和 <code>[ ]</code> 和 <code>｜</code> 对应于自己</li>
-<li><code>{ }</code> 对应于 <code>\{ \}</code></li>
-<li><code>||</code> 对应于 <code>\|</code></li>
-<li>当要显示大号的括号或分隔符时，要对应用 <code>\left</code> 和 <code>\right</code>，如：</li>
-<li><code>$$f(x,y,z) = 3y^2 z \left( 3 + \frac{7x+5}{1 + y^2} \right).$$</code><br> $$f(x,y,z) = 3y^2 z \left( 3 + \frac{7x+5}{1 + y^2} \right).$$</li>
-<li><code>\left.</code> 和 <code>\right.</code> 只用与匹配，本身是不显示的，比如:</li>
-<li><code>$$\left. \frac{du}{dx} \right|_{x=0}.$$</code><br> $$\left. \frac{du}{dx} \right|_{x=0}.$$</li>
-</ul>
-<h2 id="8、多行的数学公式"><a href="#8、多行的数学公式" class="headerlink" title="8、多行的数学公式"></a><code>8、多行的数学公式</code></h2><p><code>\begin{equation*}</code><br><code>\cos 2\theta &amp; = &amp; \cos^2 \theta - \sin^2 \theta \\</code><br><code>&amp; = &amp; 2 \cos^2 \theta - 1.</code><br><code>\end{equation*}</code></p>
-<ul>
-<li>其中<code>&amp;</code>是对齐点，表示在此对齐</li>
-<li>使latex不自动显示序号，如果想让latex自动标上序号，则把*去掉</li>
-<li>效果图<br>\begin{eqnarray*}<br>\cos 2\theta &amp; = &amp; \cos^2 \theta - \sin^2 \theta \\<br>&amp; = &amp; 2 \cos^2 \theta - 1.<br>\end{eqnarray*}</li>
-</ul>
-<h2 id="9、导数、极限、求和、积分"><a href="#9、导数、极限、求和、积分" class="headerlink" title="9、导数、极限、求和、积分"></a><code>9、导数、极限、求和、积分</code></h2><ul>
-<li>$\frac{du}{dt} and \frac{d^2 u}{dx^2}$ are obtained by<br><code>$\frac{du}{dt} and \frac{d^2 u}{dx^2}$</code></li>
-<li>$\partial$ is obtained by <code>$\partial$</code></li>
-<li>$\lim_{x \to +\infty}$, $\inf_{x &gt; s}$ and $\sup_K$ are obtained respectively by <code>$\lim_{x \to +\infty}</code>$, <code>$\inf_{x &gt; s}$</code> and <code>$\sup_K$</code></li>
-<li>$\lim_{x \to 0} \frac{3x^2 +7x^3}{x^2 +5x^4} = 3$ is obtained by   <code>$\lim_{x \to 0} \frac{3x^2 +7x^3}{x^2 +5x^4} = 3$</code></li>
-<li>$\sum_{k=1}^n k^2 = \frac{1}{2} n (n+1).$ is obtained by <code>$\sum_{k=1}^n k^2 = \frac{1}{2} n (n+1).$</code></li>
-<li><code>积分</code><br>$$\int_a^b f(x)\,dx.$$ is obtained by <code>$$ \int_a^b f(x)\,dx.$$</code></li>
-<li>$$\int_0^{+\infty} x^n e^{-x} \,dx = n!.$$<br><code>$$\int_0^{+\infty} x^n e^{-x} \,dx = n!.$$</code></li>
-<li>$$\int \cos \theta \,d\theta = \sin \theta.$$<br><code>$$\int \cos \theta \,d\theta = \sin \theta.$$</code></li>
-<li>$$\int_{x^2 + y^2 \leq R^2} f(x,y)\,dx\,dy<br>= \int_{\theta=0}^{2\pi} \int_{r=0}^R<br>f(r\cos\theta,r\sin\theta) r\,dr\,d\theta.$$<br><code>$$\int_{x^2 + y^2 \leq R^2} f(x,y)\,dx\,dy</code><br><code>= \int_{\theta=0}^{2\pi} \int_{r=0}^R</code><br><code>f(r\cos\theta,r\sin\theta) r\,dr\,d\theta.$$</code></li>
-<li>$$\int_0^R \frac{2x\,dx}{1+x^2} = \log(1+R^2).$$<br><code>$$\int_0^R \frac{2x\,dx}{1+x^2} = \log(1+R^2).$$</code></li>
-</ul>
-<p><code>To be continue ...</code></p>
-
+      
     
   </div>
 </article>
