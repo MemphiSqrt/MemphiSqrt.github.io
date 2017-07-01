@@ -24,7 +24,7 @@
 <meta property="og:description" content="简介Treap，一种表现优异的BST 优势其较于AVL、红黑树实现简单，浅显易懂较于Splay常数小，通常用于树套BST表现远远优于Splay或许有人想说SBT，SBT我没有实现过，据说比较快但是SBT、Splay以及旋转版Treap等BST都不可以比较方便地实现‘可持久化操作’ 注Treap另有旋转版Treap本文主要介绍非旋转版Treap 介绍Treap=Tree+HeapTreap是一颗同时">
 <meta property="og:image" content="http://yoursite.com/images/1.png">
 <meta property="og:image" content="http://yoursite.com/images/2.png">
-<meta property="og:updated_time" content="2017-07-01T08:23:04.000Z">
+<meta property="og:updated_time" content="2017-07-01T08:32:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="非旋转Treap及可持久化[Merge,Split]">
 <meta name="twitter:description" content="简介Treap，一种表现优异的BST 优势其较于AVL、红黑树实现简单，浅显易懂较于Splay常数小，通常用于树套BST表现远远优于Splay或许有人想说SBT，SBT我没有实现过，据说比较快但是SBT、Splay以及旋转版Treap等BST都不可以比较方便地实现‘可持久化操作’ 注Treap另有旋转版Treap本文主要介绍非旋转版Treap 介绍Treap=Tree+HeapTreap是一颗同时">
@@ -232,7 +232,7 @@
 <li>key，满足二叉搜索树性质，即中序遍历按照key值有序</li>
 <li>fix，满足堆性质，即对于任何一颗以x为根的子树，x的fix值为该子树的最值，方便后文叙述，定义为最小值</li>
 </ul>
-<p>为了满足期望，fix值是一个随机的权值，用来保证树高期望为$\log n$<br> 剩下的key值则是用来维护我们想要维护的一个权值，此为一个二叉搜索树的基本要素</p>
+<p>为了满足期望，fix值是一个随机的权值，用来保证树高期望为 $\log n$<br> 剩下的key值则是用来维护我们想要维护的一个权值，此为一个二叉搜索树的基本要素</p>
 <h2 id="支持操作"><a href="#支持操作" class="headerlink" title="支持操作"></a>支持操作</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ul>
 <li>Build【构造Treap】$O(n)$</li>
 <li>Merge【合并】$O(\log n)$</li>
