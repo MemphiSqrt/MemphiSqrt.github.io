@@ -33,7 +33,7 @@ Top-Tree简介 这是什么？
 <meta property="og:image" content="http://yoursite.com/images/4.png">
 <meta property="og:image" content="http://yoursite.com/images/5.png">
 <meta property="og:image" content="http://yoursite.com/images/6.png">
-<meta property="og:updated_time" content="2017-07-06T16:47:02.000Z">
+<meta property="og:updated_time" content="2017-07-06T16:50:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态树拓展相关">
 <meta name="twitter:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
@@ -188,7 +188,7 @@ Top-Tree简介 这是什么？
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
+    <strong class="toc-title">Posts List</strong>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Top-Tree"><span class="toc-text">Top-Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Link-Cut-Tree的复杂度分析"><span class="toc-text">Link-Cut-Tree的复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Tree的操作分析"><span class="toc-text">Top-Tree的操作分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Tree的复杂度分析"><span class="toc-text">Top-Tree的复杂度分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Euler-Tour-Tree"><span class="toc-text">Euler-Tour-Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-1"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不省略Euler-Tour序"><span class="toc-text">不省略Euler-Tour序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#省略Euler-Tour序为单括号dfs序"><span class="toc-text">省略Euler-Tour序为单括号dfs序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#省略Euler-Tour序为括号匹配dfs序"><span class="toc-text">省略Euler-Tour序为括号匹配dfs序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本操作：access"><span class="toc-text">基本操作：access</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#换根"><span class="toc-text">换根</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树上动态联通块问题"><span class="toc-text">树上动态联通块问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入-1"><span class="toc-text">引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Link-Cut-Memphis"><span class="toc-text">Link-Cut-Memphis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-2"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expose操作"><span class="toc-text">expose操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结尾及reference"><span class="toc-text">结尾及reference</span></a></li></ol>
   </div>
 
@@ -278,8 +278,10 @@ Top-Tree简介 这是什么？
 <h2 id="省略Euler-Tour序为单括号dfs序"><a href="#省略Euler-Tour序为单括号dfs序" class="headerlink" title="省略Euler-Tour序为单括号dfs序"></a>省略Euler-Tour序为单括号dfs序</h2><p> 一般只是下一种实现方法的简略版，如果我们不需要链信息，可以不记录括号匹配。</p>
 <h2 id="省略Euler-Tour序为括号匹配dfs序"><a href="#省略Euler-Tour序为括号匹配dfs序" class="headerlink" title="省略Euler-Tour序为括号匹配dfs序"></a>省略Euler-Tour序为括号匹配dfs序</h2><p> 可支持基本操作：</p>
 <ul>
-<li>子树操作</li>
-<li>换父亲</li>
+<li><p>子树操作</p>
+</li>
+<li><p>换父亲</p>
+</li>
 <li><p>链询问</p>
 <p>以上操作直接使用BST维护dfs序即可，复杂度均为$O(n \log n)$。</p>
 <p>通过和LCT结合可以把复杂度提升一个$\log n$来换取链修改的功能。</p>
@@ -303,8 +305,10 @@ Top-Tree简介 这是什么？
 <h1 id="树上动态联通块问题"><a href="#树上动态联通块问题" class="headerlink" title="树上动态联通块问题"></a>树上动态联通块问题</h1><h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p> 我们从一个经典的问题开始。</p>
 <p>  QTREE7：每个点有黑白两种颜色。三种操作。</p>
 <ul>
-<li>单点修改颜色</li>
-<li>单点修改权值</li>
+<li><p>单点修改颜色</p>
+</li>
+<li><p>单点修改权值</p>
+</li>
 <li><p>询问连通块最大权值</p>
 <p>解法有很多，我现在比较了解的有两种。</p>
 </li>
@@ -364,7 +368,7 @@ Top-Tree简介 这是什么？
 <p>复杂度上界$O(n\log^2 n)$</p>
 <p>至此我们就可以维护链修改+维护联通块dfs序了。</p>
 <h1 id="结尾及reference"><a href="#结尾及reference" class="headerlink" title="结尾及reference"></a>结尾及reference</h1><p>以上，是我在OI届最后一份学术性文章，从is-programmer转载而来，借用了Stilwell在NOI冬令营上pdf的图片。</p>
-<p>希望以后能有机会继续研究研究数据结构，发表paper。</p>
+<p>感谢观看，如有错误欢迎指出。</p>
 
     
   </div>
@@ -398,7 +402,7 @@ Top-Tree简介 这是什么？
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">
