@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+  
+  <title>动态树拓展相关 | Memphis</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="DSA," />
+  
+
+  <meta name="description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
+Top-Tree简介 这是什么？
+  一种Link-Cut-Tree的拓展，以维护子树信息著称。
+  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
+  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态树拓展相关">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/动态树拓展相关/index.html">
+<meta property="og:site_name" content="Memphis">
+<meta property="og:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
+Top-Tree简介 这是什么？
+  一种Link-Cut-Tree的拓展，以维护子树信息著称。
+  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
+  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
+<meta property="og:image" content="http://yoursite.com/images/3.png">
+<meta property="og:image" content="http://yoursite.com/images/4.png">
+<meta property="og:image" content="http://yoursite.com/images/5.png">
+<meta property="og:image" content="http://yoursite.com/images/6.png">
+<meta property="og:updated_time" content="2017-07-06T16:47:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="动态树拓展相关">
+<meta name="twitter:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
+Top-Tree简介 这是什么？
+  一种Link-Cut-Tree的拓展，以维护子树信息著称。
+  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
+  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
+<meta name="twitter:image" content="http://yoursite.com/images/3.png">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+</head>
+
+<body>
+
+
+  
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Top-Tree"><span class="toc-text">Top-Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Link-Cut-Tree的复杂度分析"><span class="toc-text">Link-Cut-Tree的复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Tree的操作分析"><span class="toc-text">Top-Tree的操作分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Top-Tree的复杂度分析"><span class="toc-text">Top-Tree的复杂度分析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Euler-Tour-Tree"><span class="toc-text">Euler-Tour-Tree</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-1"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#不省略Euler-Tour序"><span class="toc-text">不省略Euler-Tour序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#省略Euler-Tour序为单括号dfs序"><span class="toc-text">省略Euler-Tour序为单括号dfs序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#省略Euler-Tour序为括号匹配dfs序"><span class="toc-text">省略Euler-Tour序为括号匹配dfs序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本操作：access"><span class="toc-text">基本操作：access</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#换根"><span class="toc-text">换根</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#树上动态联通块问题"><span class="toc-text">树上动态联通块问题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#引入-1"><span class="toc-text">引入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Link-Cut-Memphis"><span class="toc-text">Link-Cut-Memphis</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介-2"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正文"><span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#expose操作"><span class="toc-text">expose操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#结尾及reference"><span class="toc-text">结尾及reference</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-动态树拓展相关" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">动态树拓展相关</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2017.07.06</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Memphis</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://memphisqrt.github.io/2017/07/06/动态树拓展相关/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和<del>一种奇怪的未命名的动态树</del>。</p>
+<h1 id="Top-Tree"><a href="#Top-Tree" class="headerlink" title="Top-Tree"></a>Top-Tree</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p> 这是什么？</p>
+<p>  一种Link-Cut-Tree的拓展，以维护子树信息著称。</p>
+<p>  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq</p>
+<p>  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区别是什么，我也不知道&gt;.&lt;）</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p> 我们该如何动态维护子树信息？先从一种动态树的解决方式——Link-Cut-Tree(LCT)的复杂度证明说起。</p>
+<p>  首先大家应该都会LCT和树链剖分，不会的还请先不要看这篇文章。</p>
+<p>  以下证明部分参考杨哲的集训队作业<a href="http://wenku.baidu.com/view/75906f160b4e767f5acfcedb" target="_blank" rel="external">《QTREE解法的一些研究》</a>。</p>
+<h3 id="Link-Cut-Tree的复杂度分析"><a href="#Link-Cut-Tree的复杂度分析" class="headerlink" title="Link-Cut-Tree的复杂度分析"></a>Link-Cut-Tree的复杂度分析</h3><p>  我们知道LCT和树链剖分都有轻重链之分，然而LCT的轻重链是动态变化的，树剖却不是。</p>
+<p>  我们先把一棵树树链剖分，定义轻边为不在重链上的边，重边为在重链上的边。再对LCT做定义，一个节点在重链【此处的重链为LCT的动态重链，和树剖无关】上的直接儿子定义为preferred child，连向该儿子的边定义为preferred edge。</p>
+<p>  在LCT的access操作中，我们只要证明preferred child的更改次数是均摊$O(n\log n)$ 的，就可以<strong>先</strong>证明其复杂度上界为$O(n\log^2 n)$。</p>
+<p>  现在证明preferred child的更改次数是均摊$O(n\log n)$ 的，首先我们知道一次access最多让$O(\log n)$ 条轻边变为preferred edge，然而重边一次却会有很多变为preferred edge，那么复杂度就是重边变为preferred edge的次数，而重边变为preferred edge的次数级别等于重边从preferred edge变为非preferred edge+所有边【即$n-1$】，那么复杂度就是重边从preferred edge变为非preferred edge的次数，对于一条重边，变为非preferred edge以后，意味着有一条轻边变为preferred edge【或者preferred edge消失，这种情况最多只有$O(q)$个，$q$为access次数】，于是重边从preferred edge变为非preferred edge的次数至多为轻边变为preferred edge的次数，而轻边变为preferred edge的次数显然是$O(n\log n)$的，得证。</p>
+<p>  其实到这里就可以引入TopTree了，为了完整顺便把splay维护的LCT复杂度是也证了。</p>
+<p>  现在证明splay维护的LCT复杂度是$O(\log n)$的，首先splay的单次旋转的复杂度是均摊$O(\log sz_{root} - \log sz_x )$，$root$是splay的根，$x$是提根的节点，$sz_x$是$x$子树大小。这个复杂度的证明详见splay的复杂度证明，证明涉及对双旋splay的每一种操作的分析，通过缩放最后还有3的常数，非常麻烦，这里不证了。</p>
+<p>  然后我们代入access中分析，很容易发现中间的加减相互抵消了，最后的复杂度是均摊$O(\log n - \log sz_x)$。</p>
+<p>  至此我们完成了LCT的复杂度分析。</p>
+<h3 id="Top-Tree的操作分析"><a href="#Top-Tree的操作分析" class="headerlink" title="Top-Tree的操作分析"></a>Top-Tree的操作分析</h3><p>  那么我们要维护子树信息，该怎么办？</p>
+<p>  preferred child的更改次数是均摊$O(n\log n)$，这个性质非常优秀，很多动态树题目都通过这个性质来维护各种信息，TopTree也是这样。</p>
+<p>  考虑在access的时候顺便维护轻儿子的信息，这样就可以动态维护子树信息了。</p>
+<p>  说白了TopTree其实就没了，因为剩下的就是子树和链之间互相影响的细节了，好好地写一下就能自己处理掉了。</p>
+<p>  如果儿子无序，那么我们可以直接维护一个二叉树来维护那些轻儿子，如果儿子有序，那么同样可以维护一个BST来维护轻儿子。</p>
+<p>  每次access进行preferred child更改的时候，考虑轻重边的更改，把要变成轻儿子的重儿子加入维护轻儿子的数据结构，把要变成重儿子的轻儿子从维护轻儿子的数据结构中拿出，放入LCT本身有的维护链的splay中。</p>
+<p>  这样就完成了access操作，但是打标记的时候会特别恶心，但是无论如何，遵循“轻重分开”的原则进行维护一定没有错的，也就是子树信息管子树信息维护，链信息管链信息维护，当然根据需要，有时候子树信息需要加到链信息上去维护。</p>
+<p>  (然后sone1的10kb就是这样出来的= =。。)</p>
+<h3 id="Top-Tree的复杂度分析"><a href="#Top-Tree的复杂度分析" class="headerlink" title="Top-Tree的复杂度分析"></a>Top-Tree的复杂度分析</h3><p>  关于LCT原有部分复杂度无需证明了，所需要证明的就是维护轻儿子的复杂度。</p>
+<p>  这个部分还不会…… 有兴趣的人可以自己去看看论文。</p>
+<h1 id="Euler-Tour-Tree"><a href="#Euler-Tour-Tree" class="headerlink" title="Euler-Tour-Tree"></a>Euler-Tour-Tree</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><p> 一种从简到烦皆可的维护树形态的数据结构，现先讲Euler-Tour序。</p>
+<p>  可分需要有好几种写法：</p>
+<ul>
+<li>不省略Euler-Tour序</li>
+<li>省略Euler-Tour序为单括号dfs序</li>
+<li><p>省略Euler-Tour序为括号匹配dfs序</p>
+<p>其中第一种一般不用于动态树维护。</p>
+</li>
+</ul>
+<h2 id="不省略Euler-Tour序"><a href="#不省略Euler-Tour序" class="headerlink" title="不省略Euler-Tour序"></a>不省略Euler-Tour序</h2><p> 感觉就只能方便求LCA了，可以比较轻松地做到在线#O(n\log n)-O(1)$不修改求LCA，ST表记深度即可。</p>
+<p>  经测试这玩意跑特快，蛮有实用价值的，比那啥$O(n)-O(1)$LCA有用。</p>
+<p>  不过和本主题无关。</p>
+<h2 id="省略Euler-Tour序为单括号dfs序"><a href="#省略Euler-Tour序为单括号dfs序" class="headerlink" title="省略Euler-Tour序为单括号dfs序"></a>省略Euler-Tour序为单括号dfs序</h2><p> 一般只是下一种实现方法的简略版，如果我们不需要链信息，可以不记录括号匹配。</p>
+<h2 id="省略Euler-Tour序为括号匹配dfs序"><a href="#省略Euler-Tour序为括号匹配dfs序" class="headerlink" title="省略Euler-Tour序为括号匹配dfs序"></a>省略Euler-Tour序为括号匹配dfs序</h2><p> 可支持基本操作：</p>
+<ul>
+<li>子树操作</li>
+<li>换父亲</li>
+<li><p>链询问</p>
+<p>以上操作直接使用BST维护dfs序即可，复杂度均为$O(n \log n)$。</p>
+<p>通过和LCT结合可以把复杂度提升一个$\log n$来换取链修改的功能。</p>
+</li>
+</ul>
+<h3 id="基本操作：access"><a href="#基本操作：access" class="headerlink" title="基本操作：access"></a>基本操作：access</h3><p>  在LCTaccess的时候把重儿子表示的子树dfs序拼接到父亲表示的dfs序首，这样就能通过$O(\log^2 n)$的时间得到一个点到根这么一条链上的连续信息。</p>
+<p>  复杂度$O(n \log^2 n)$</p>
+<p>  这样我们可以实现链修改了。</p>
+<p>  然而相较TopTree，如何实现换根？</p>
+<h3 id="换根"><a href="#换根" class="headerlink" title="换根"></a>换根</h3><p>  这种换根方式参考松爷的方式，在ZJOI2015day1的课件中有提及。</p>
+<p>  我们考虑不管括号匹配的左右关系，如何换根。</p>
+<p>  那么我们只需要把需要换根的节点x access，然后如下图。</p>
+<p>  <img src="/images/3.png" alt="3"></p>
+<p>设access以后x所处位置是p，那么reverse(1,p),reverse(p+1,n*2)</p>
+<p>  这样关系就对了，但是那些红边连向的子树内部左右括号全反了，怎么办呢。</p>
+<p>  也很简单，直接在LCT上打个标记，下次遇到的时候直接把子树翻转回来就行了,不过这样链询问的复杂度也变为了$O(n\log^2 n)$【这么说起来直接写单括号算了】</p>
+<p>  复杂度当然也是$O(n\log^2 n)$</p>
+<p>  至此，ETT基本完成了TopTree的所有操作，只不过……杂度多了一些。。事实上，他跑得确实比TopTree慢。</p>
+<p>  Q：所以说这种数据结构并没有什么卵用？</p>
+<p>  <del>A：不！他能衬托TopTree是有用的！</del></p>
+<h1 id="树上动态联通块问题"><a href="#树上动态联通块问题" class="headerlink" title="树上动态联通块问题"></a>树上动态联通块问题</h1><h2 id="引入-1"><a href="#引入-1" class="headerlink" title="引入"></a>引入</h2><p> 我们从一个经典的问题开始。</p>
+<p>  QTREE7：每个点有黑白两种颜色。三种操作。</p>
+<ul>
+<li>单点修改颜色</li>
+<li>单点修改权值</li>
+<li><p>询问连通块最大权值</p>
+<p>解法有很多，我现在比较了解的有两种。</p>
+</li>
+<li><p>TopTree强行维护异色子树信息，涉及link、cut</p>
+</li>
+<li><p>既然TopTree可行，我们可以考虑ETT的思路，利用dfs序，方法如下：</p>
+</li>
+</ul>
+<p>显然，一个连通块是可以用dfs序表示的，那么将一个节点的信息存于其深度最低的与其异色的祖先内【根节点特判】，也就是说每个节点存着异色子连通块信息，设这个信息为S(x)</p>
+<p>考虑修改节点x的颜色的时候如何操作：</p>
+<ul>
+<li><p>首先将dfs序中其同色连通块儿子取出，变为新的S(x),将原本的S(x)塞入该节点同色连通块的dfs序中。</p>
+</li>
+<li><p>如果修改节点颜色后颜色与其父亲不一致，那么先前其一定在非直接父亲的祖先的S(x)内，那么从那个祖先内取出，存入直接父亲的S(x)内。若修改节点颜色后颜色与其父亲一致，那么先前其一定在直接父亲的S(x)内，从中取出存入直接父亲所在连通块的dfs序中。</p>
+</li>
+</ul>
+<p>这样我们就成功动态维护了dfs序，dfs序都维护了，max当然不在话下。</p>
+<p>  如果我们把点修改颜色，换成链修改颜色呢？</p>
+<p>  我们把问题一般化：<strong>链修改+维护联通块dfs序</strong></p>
+<h1 id="Link-Cut-Memphis"><a href="#Link-Cut-Memphis" class="headerlink" title="Link-Cut-Memphis"></a><del>Link-Cut-Memphis</del></h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><p>  一种解决树上动态联通块链修改问题的方式。</p>
+<p>  不知道该叫什么，那就大言不惭地和校内人一起叫LCM算了。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li><p>①首先明确一下链修改=一个点到根路径上一个点的区间修改，很显然，找出LCA就行了</p>
+</li>
+<li><p>②并且在这个区间里，设每个节点颜色为$a<em>1,a_2,…,a_N$ ，对于$1\leqslant i&lt;N, a_i \not = a</em>{i+1}$，我们称为一个颜色更变处，设每次操作$i$经过$cnt<em>i$个颜色更变处，那么 $\sum\</em>{i=1}^{m}{cnt_i}$ 是 $O(m\log n)$级别的，复杂度证明同LCT的preferred-child更变次数的证明。</p>
+</li>
+</ul>
+<p>明确了以上两点后，我们回顾一下QTREE7的解决方法。</p>
+<p>  首先是Top-Tree，我认为直接上是不能做的，至少我不会，sone爷也不会。</p>
+<p>  顺着方法2的思路，当然直接上也是不能做的，但是可以看看方法2都维护了什么：</p>
+<p>   <strong>异色子联通块信息</strong></p>
+<p>  Q:为什么要维护这个东西？ A:为了方便<strong>维护一个点颜色翻转后处于什么联通块</strong>这一需求。</p>
+<p>  如法炮制，我们知道了②，也就是说暴力求该每个相同的颜色段复杂度是对的，但是我们要<strong>维护一条同色链颜色翻转后处于什么联通块</strong>。所以，我们需要维护的不仅仅是子联通块了，我们还需要更多。</p>
+<p>  现颜色以白色和黑色为例，比如有这么一棵树，节点地颜色只有黑白两种，我们分别维护黑树和白树，相对地定义主树和辅树。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li><p>一个维护同色联通块信息，可视为<strong>一个dfs序表示的同色联通块</strong>，称之为主树</p>
+<p>——用来维护一条链不变颜色，处于哪个联通块</p>
+</li>
+<li><p>一个维护异色联通块信息，可视为<strong>一个LCT串起来的异色子联通块的dfs序</strong>，称之为辅树</p>
+<p>——用来维护一条链变了颜色，处于哪个联通块</p>
+</li>
+</ul>
+<p>以下是几种可能的黑树形态，其中方块表示黑点，圆表示白点，实边表示在同一个dfs序内，是主树构成，虚边表示在LCT中相连，是父联通块的辅树构成。</p>
+<p>注意：<strong>一个联通块的主树是构成其父联通块的辅树的一部分</strong></p>
+<p><img src="/images/4.png" alt="4"></p>
+<p><img src="/images/5.png" alt="5"></p>
+<p><img src="/images/6.png" alt="6"></p>
+<h3 id="expose操作"><a href="#expose操作" class="headerlink" title="expose操作"></a>expose操作</h3><p> 定义expose操作为access操作在辅树上的变种操作：</p>
+<p>  expose一个点，将其到该联通块顶端打通，然后将所有异色联通块dfs序串起来。</p>
+<p>  *定义expose后所发现的联通顶端节点为关键节点。</p>
+<p>  expose后将该联通块辅树关键节点所在dfs序接入关键节点父亲所在的主树中，和父联通块主树合并；相对的，<strong>将主树中的关键节点从关键节点父亲的辅树中该父亲节点所代表的异色子联通块dfs序中切除</strong>，成为父联通块辅树的一部分。</p>
+<p>  至此，我们可以发现通过expose及其之后的操作，使得该联通块的一条链完成与父联通块的合并，并且原本的主树变为辅树，辅树变为主树。</p>
+<p>思路大致明朗。</p>
+<p> <br></p>
+<p>  所谓链修改操作即为将一个节点到根上的一段进行主树和辅树的相互变换。</p>
+<p>  当然还有很多细节，比如根节点所在联通块要特判之类的。</p>
+<p>复杂度上界$O(n\log^2 n)$</p>
+<p>至此我们就可以维护链修改+维护联通块dfs序了。</p>
+<h1 id="结尾及reference"><a href="#结尾及reference" class="headerlink" title="结尾及reference"></a>结尾及reference</h1><p>以上，是我在OI届最后一份学术性文章，从is-programmer转载而来，借用了Stilwell在NOI冬令营上pdf的图片。</p>
+<p>希望以后能有机会继续研究研究数据结构，发表paper。</p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/07/01/非旋转Treap及可持久化-Merge-Split/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'Memphis';
+    
+    var disqus_url = 'http://yoursite.com/2017/07/06/动态树拓展相关/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//Memphis.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+</body>
+</html>
