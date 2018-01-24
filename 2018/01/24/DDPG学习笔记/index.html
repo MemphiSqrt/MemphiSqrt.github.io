@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 
 
-  <html class="light page-search">
+  <html class="light page-post">
 
 
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
   
-  <title>search | Memphis</title>
+  <title>DDPG学习笔记 | Memphis</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Memphis,学生,c++,python" />
+    <meta name="keywords" content="RL,ML," />
   
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="search">
-<meta property="og:url" content="http://yoursite.com/search/index.html">
+  <meta name="description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+相关project的连接在这里
+pytorch-gym
+TODO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DDPG学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/01/24/DDPG学习笔记/index.html">
 <meta property="og:site_name" content="Memphis">
-<meta property="og:updated_time" content="2017-06-29T03:19:39.000Z">
+<meta property="og:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+相关project的连接在这里
+pytorch-gym
+TODO">
+<meta property="og:updated_time" content="2018-01-24T09:27:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="search">
+<meta name="twitter:title" content="DDPG学习笔记">
+<meta name="twitter:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+相关project的连接在这里
+pytorch-gym
+TODO">
 
   
 
@@ -84,17 +96,8 @@
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
   
 
-  <div class="content content-search">
-  <div class="page-header">
-
-  
-    <div class="breadcrumb">
-      <div class="location">Search</div>
-      <i class="icon-location"></i>
-    </div>
-  
-
-  
+  <div class="post-header CENTER">
+   
   <div class="toolbox">
     <a class="toolbox-entry" href="/">
       <span class="toolbox-entry-text">盒子</span>
@@ -162,38 +165,87 @@
   </div>
 
 
+</div>
 
-  <div class="box-blog-info">
-    <a class="avatar" href="/">
-      <img src="/images/avatar.png" alt="" />
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-DDPG学习笔记" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">DDPG学习笔记</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2018.01.24</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>Memphis</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://memphisqrt.github.io/2018/01/24/DDPG学习笔记/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历</p>
+<p>相关project的连接在这里</p>
+<p><a href="https://github.com/megvii-rl/pytorch-gym" target="_blank" rel="external">pytorch-gym</a></p>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
+    
+  </div>
+</article>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2017/07/06/动态树拓展相关/">
+        <i class="icon icon-angle-left"></i>
     </a>
-    <div class="info">
-      <h3 class="name" style="font-family: calligraffittiregular">
-        MemphiS
-      </h3>
-      <div class="slogan">
-        Everything is under the best arrangement.
-      </div>
-    </div>
+    <a class="hide pull-right" href="/">
+        <i class="icon icon-angle-right"></i>
+    </a>
   </div>
+
+
+
 
 </div>
 
-  <div class="wrap-search-box">
-    <div class="search-box">
-      <input id="input-search"  class="input-search" type="text" placeholder="search">
-      <i class="icon-search"></i>
-    </div>
-  </div>
 
-  <ul id="list-search" class="list-search">
-    
-      <li class="tip">So which is arrange for you?</li>
-    
-  </ul>
-
-</div>
-
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
 
 
 
@@ -270,6 +322,44 @@
 </div>
 
 
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'Memphis';
+    
+    var disqus_url = 'http://yoursite.com/2018/01/24/DDPG学习笔记/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//Memphis.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
 
   
 
