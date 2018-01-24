@@ -12,13 +12,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="ML,RL," />
+    <meta name="keywords" content="RL,ML," />
   
 
   <meta name="description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
 相关project的连接在这里
 pytorch-gym
-TODO">
+DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDPG学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/01/24/DDPG学习笔记/index.html">
@@ -26,14 +27,18 @@ TODO">
 <meta property="og:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
 相关project的连接在这里
 pytorch-gym
-TODO">
-<meta property="og:updated_time" content="2018-01-24T09:27:12.000Z">
+DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
+<meta property="og:image" content="http://yoursite.com/images/ddpg_01.png">
+<meta property="og:updated_time" content="2018-01-24T11:05:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDPG学习笔记">
 <meta name="twitter:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
 相关project的连接在这里
 pytorch-gym
-TODO">
+DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
+<meta name="twitter:image" content="http://yoursite.com/images/ddpg_01.png">
 
   
 
@@ -169,8 +174,8 @@ TODO">
 
 
   <div id="toc" class="toc-article">
-    <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li></ol>
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DDPG可以做什么"><span class="toc-text">DDPG可以做什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#简略的模型"><span class="toc-text">简略的模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li></ol>
   </div>
 
 
@@ -221,7 +226,15 @@ TODO">
       <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历</p>
 <p>相关project的连接在这里</p>
 <p><a href="https://github.com/megvii-rl/pytorch-gym" target="_blank" rel="external">pytorch-gym</a></p>
-<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
+<h1 id="DDPG可以做什么"><a href="#DDPG可以做什么" class="headerlink" title="DDPG可以做什么"></a>DDPG可以做什么</h1><p>和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。</p>
+<p>先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPole，对于一根杆子，你只能控制它的底部，杆子会向一个方向倾倒，方向只有两个，你需要实时选择一个方向去让它尽量久的立着。</p>
+<p><img src="/images/ddpg_01.png" alt="1"></p>
+<p>对于DQN算法，相当于建立了一个网络作为打分机制，对于一个$status$，对于任意一个$action$，打分机制会给$(status,action)$进行打分，这个分数应该尽量地去拟合最终的$reward$，然后挑选出打分最好的那个$action$作为答案。但是我们知道，要训练一个网络需要计算loss函数</p>
+<p>为了计算loss，DQN还会进行保存，因为每个$action$实施以后，会得到相应的$reward$，然后这样的经历保存下来。以后对于这样的经历，让现在的打分机制去对那些$action$打分，而那些$action$得到的$reward$是有标准答案的，这样就可以计算$loss$了。</p>
+<p>当然还有一些细节，但DQN的实现原理大概就是这样的。</p>
+<p>了解DQN以后，我们就能够发现，<strong>DQN只能处理有限的$action$</strong>！</p>
+<p>我们称这样的$action$是离散的(discrete)</p>
+<h1 id="简略的模型"><a href="#简略的模型" class="headerlink" title="简略的模型"></a>简略的模型</h1><h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
     
   </div>
 </article>
@@ -254,7 +267,7 @@ TODO">
   <span id="cover" class="cover hide"></span>
   <div id="modal-dialog" class="modal-dialog hide-dialog">
     <div class="modal-header">
-      <span id="close" class="btn-close">关闭</span>
+      <span id="close" class="btn-close">Close</span>
     </div>
     <hr>
     <div class="modal-body">
