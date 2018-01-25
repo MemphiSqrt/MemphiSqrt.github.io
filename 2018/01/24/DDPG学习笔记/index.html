@@ -15,29 +15,29 @@
     <meta name="keywords" content="RL,ML," />
   
 
-  <meta name="description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+  <meta name="description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历 （等等我为什么在megvii折腾RL？）
 相关project的连接在这里
 pytorch-gym
 DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
-先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DDPG学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/01/24/DDPG学习笔记/index.html">
 <meta property="og:site_name" content="Memphis">
-<meta property="og:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+<meta property="og:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历 （等等我为什么在megvii折腾RL？）
 相关project的连接在这里
 pytorch-gym
 DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
-先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出">
 <meta property="og:image" content="http://yoursite.com/images/ddpg_01.png">
-<meta property="og:updated_time" content="2018-01-24T11:23:58.000Z">
+<meta property="og:updated_time" content="2018-01-25T05:58:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDPG学习笔记">
-<meta name="twitter:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历
+<meta name="twitter:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历 （等等我为什么在megvii折腾RL？）
 相关project的连接在这里
 pytorch-gym
 DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
-先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出选择，比如Gym上著名的例子CartPol">
+先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出">
 <meta name="twitter:image" content="http://yoursite.com/images/ddpg_01.png">
 
   
@@ -223,7 +223,7 @@ DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$s
 
   <div class="article-content">
     
-      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历</p>
+      <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历 <del>（等等我为什么在megvii折腾RL？）</del></p>
 <p>相关project的连接在这里</p>
 <p><a href="https://github.com/megvii-rl/pytorch-gym" target="_blank" rel="external">pytorch-gym</a></p>
 <h1 id="DDPG可以做什么"><a href="#DDPG可以做什么" class="headerlink" title="DDPG可以做什么"></a>DDPG可以做什么</h1><p>和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。</p>
@@ -231,11 +231,15 @@ DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$s
 <p><img src="/images/ddpg_01.png" alt="1"></p>
 <p>对于DQN算法，相当于建立了一个网络作为打分机制，对于一个$status$，对于任意一个$action$，打分机制会给$(status,action)$进行打分，这个分数应该尽量地去拟合最终的$reward$，然后挑选出打分最好的那个$action$作为答案。但是我们知道，<strong>要训练一个网络需要计算loss函数</strong>。</p>
 <p>为了计算loss，DQN还会进行保存，因为每个$action$实施以后，会得到相应的$reward$，然后这样的经历保存下来。以后对于这样的经历，让现在的打分机制去对那些$action$打分，而那些$action$得到的$reward$是有标准答案的，这样就可以计算$loss$了。</p>
-<p>当然还有一些细节，但DQN的实现原理大概就是这样的。</p>
+<p>当然还有一些细节，比如标准答案其实只有当前这步的标准答案，未来的总reward还要通过其他方式估算，但DQN的实现原理大概就是这样的。</p>
 <p>了解DQN以后，我们就能够发现，<strong>DQN只能处理有限的$action$</strong>。</p>
 <p>我们称这样的$action$是离散的(discrete)。</p>
 <p>然而对于更多的问题，我们需要从无限的$action$选择一个$action$作为我们的答案，DDPG相较于DQN进行了改进，解决了$action$在连续空间下的问题。</p>
 <h1 id="简略的模型"><a href="#简略的模型" class="headerlink" title="简略的模型"></a>简略的模型</h1><p>现在把DQN中的打分机制的网络称为critic network，而DDPG引入了actor network，相当于一个人在表演，另一个人在打分。这种结构与思想有点像图像处理中GAN，当然作者我并没有实现GAN的经历，只有一些粗略的了解，就不随意对比了。</p>
+<p>对于actor network，对于一个$n$维$status$的输入，应该可以给出相应的$m$维$action$的输出（<strong>注意此处是$m$维的输出，与DQN的单独、有限的action不同</strong>），那么这个$action$就是我们每次的选择（当然在train的时候会加上一点噪音以便学习）。但是光让actor network自由发挥当然是不行的，无法计算loss，也无法优化这个网络。</p>
+<p>于是考虑加入critic network。加入的critic network和DQN一样，会对$(status,action)$进行打分，我们试图通过这个打分来计算actor network的loss。在这之前，我们需要考虑一下怎么更新critic network。</p>
+<p>方法和DQN很类似，保存每一次的状态$status$和作出的选择$action$以及得到的$reward$和下一次的$next~status$。把这些数据作为今后训练critic network的数据集，每次从中随机抽取一些，计算出标准reward和critic产生的reward的差异，得到critic network的loss，这样就能更新critic network了。</p>
+<p>那么怎么更新actor network呢？方法也很直观，直接拿更新的critic network对actor network作出的$action$进行打分，打分是越高越好，那么把打分取个负，就当作loss了。</p>
 <h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
     
   </div>
