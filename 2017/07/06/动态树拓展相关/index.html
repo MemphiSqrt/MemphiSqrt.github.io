@@ -33,7 +33,7 @@ Top-Tree简介 这是什么？
 <meta property="og:image" content="http://yoursite.com/images/4.png">
 <meta property="og:image" content="http://yoursite.com/images/5.png">
 <meta property="og:image" content="http://yoursite.com/images/6.png">
-<meta property="og:updated_time" content="2018-03-31T12:23:54.015Z">
+<meta property="og:updated_time" content="2018-03-31T13:43:09.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态树拓展相关">
 <meta name="twitter:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
@@ -322,7 +322,7 @@ Top-Tree简介 这是什么？
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
 <li><p>①首先明确一下链修改=一个点到根路径上一个点的区间修改，很显然，找出LCA就行了</p>
 </li>
-<li><p>②并且在这个区间里，设每个节点颜色为$a<em>1,a_2,…,a_N$ ，对于$1\leqslant i&lt;N, a_i \not = a</em>{i+1}$，我们称为一个颜色更变处，设每次操作$i$经过$cnt<em>i$个颜色更变处，那么 $\sum\</em>{i=1}^{m}{cnt_i}$ 是 $O(m\log n)$级别的，复杂度证明同LCT的preferred-child更变次数的证明。</p>
+<li><p>②并且在这个区间里，设每个节点颜色为$a_1,a_2,…,a_N$ ，对于$1\leqslant i&lt;N, a_i \not =  a_{i+1}$，我们称为一个颜色更变处，设每次操作$i$经过$cnt_i$个颜色更变处，那么 $\sum_{i=1}^{m}{cnt_i}$ 是 $O(m\log n)$级别的，复杂度证明同LCT的preferred-child更变次数的证明。</p>
 </li>
 </ul>
 <p>明确了以上两点后，我们回顾一下QTREE7的解决方法。</p>
