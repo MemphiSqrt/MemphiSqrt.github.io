@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-03-31T16:13:24.302Z">
+<meta property="og:updated_time" content="2018-03-31T17:01:55.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -167,7 +167,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析"><span class="toc-text">传统的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析的不足之处"><span class="toc-text">传统的分析的不足之处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑分析：对实际数据建立模型"><span class="toc-text">平滑分析：对实际数据建立模型</span></a></li></ol></li></ol>
   </div>
 
 
@@ -224,11 +224,20 @@
 <p>如果所有算法都可以很快的在多项式级别内出解，那将是很完美的。但是在很多情况下，<strong>一个不足够好的算法在理论评估和实际表现上差异巨大</strong>。</p>
 <p>一般人普遍相信在实践中的输入往往是比最坏情况下的例子更重要的。举个例子，很有名的Knapsack问题，这个问题是指，对于$n$个数，是否能够分成两个和相等的部分，这个问题没有多项式算法，除非NP=P。NBC著名新闻评论员Tim Russert在2008大选的时候提出了共和党和民主党候选人有最后同票的可能。也就是说，他解决了51个元素（TIP：美国有51个州）的Snapsack问题，而且是在很短的时间内通过手动计算得到的，也就是说这很可能没有使用我们熟知的“伪多项式动态规划”（TIP：即背包问题，背包问题的复杂度与元素大小有关，称之为“伪多项式”算法）解决了Knapsack问题！</p>
 <p>另外，著名的单纯形（Simplex）算法是一个经典的例子，单纯形算法在在实践的时候表现的非常好，但是在最坏情况下表现的很差。单纯形算法解决了线性规划问题，举个例子，对于以下公式：</p>
-<p><script type="math/tex">\max {\bf c}^T{\bf x}~~\text{subject to}~~{\bf Ax}\leqslant {\bf b}</script>                                                                                                              　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<br>其中$A$是一个$m\times n$的矩阵，$b$是一个长度为$m$的向量，而$c$是一个长度为$n$的向量。在最坏情况下，单纯形算法需要指数级的时间。</p>
+<script type="math/tex; mode=display">\max {\bf c}^T{\bf x}~~\text{subject to}~~{\bf Ax}\leqslant {\bf b}</script><p>其中$A$是一个$m\times n$的矩阵，$b$是一个长度为$m$的向量，而$c$是一个长度为$n$的向量。在最坏情况下，单纯形算法需要指数级的时间。</p>
 <p>【剩下部分有空来翻译】</p>
-<h2 id="算法的行为"><a href="#算法的行为" class="headerlink" title="算法的行为"></a>算法的行为</h2><p>假设$A$是一种算法，用来解决问题$P$，我们让$T_A[{\bf x}]$来表示算法$A$在输入为${\bf x}$时运行时间。然后我们可以用基于输入的衡量方法$T_{A_1}[{\bf x}]$和$T_{A_2}[{\bf x}]$来决定$A_1$和$A_2$两个算法哪一个更加高效。</p>
+<h1 id="算法的行为"><a href="#算法的行为" class="headerlink" title="算法的行为"></a>算法的行为</h1><p>假设$A$是一种算法，用来解决问题$P$，我们让$T_A[{\bf x}]$来表示算法$A$在输入为${\bf x}$时运行时间。然后我们可以用基于输入的衡量方法$T_{A_1}[{\bf x}]$和$T_{A_2}[{\bf x}]$来决定$A_1$和$A_2$两个算法哪一个更加高效。</p>
 <p>假设$\Omega$表示两个输入$\bf x$和$\bf y$，然后基于输入的衡量方法对于$A$决定了一个二维向量<script type="math/tex">(T_{A}[{\bf x}],T_{A}[{\bf y}])</script>。可能会出现<script type="math/tex">T_{A_1}[{\bf x}]<T_{A_2}[{\bf x}]</script>但是 <script type="math/tex">T_{A_1}[{\bf y}]>T_{A_2}[{\bf y}]</script>。</p>
 <p>然而，严格的来说，这两种算法并不能比较。更多时候，输入应该更多更复杂一些。这种instance-based complexity measure $T_A[\cdot]$决定了一个$|\Omega|$维的向量（当$\Omega$是有限的时候）。更一般的，可以看作一个函数从$\Omega$映射到${\bf R}_+^1$，但是很粗糙。为了比较两个算法，我们需要一些更加精确复杂度测量方法。</p>
+<p>一个输入域<script type="math/tex">\Omega</script>经常被看作一些子域的合集的并集<script type="math/tex">\{\Omega_1,...,\Omega_n,...\}</script>，这里$\Omega_n$代表所有在$\Omega$中规模为$n$的输入。举个例子，在排序中，$\Omega_n$是所有$n$个元素的合集；在图论算法中，$\Omega_n$则是所有大小大为$n$的图。为了简洁的表述算法$A$在$\Omega_n$下的表现，我们定义<script type="math/tex">T_A(n)</script>表示囊括了所有instance-based complexity measure <script type="math/tex">T_A[\cdot]</script>在$\Omega_n$下的值。一个更加简化的表述是用big-O或者big-$\Theta$来表示$T_A(n)$的渐进值。</p>
+<h2 id="传统的分析"><a href="#传统的分析" class="headerlink" title="传统的分析"></a>传统的分析</h2><p>我们可以理解，对于不同的方法，估计出来的在$\Omega_n$下算法的表现是不一样的。在理论计算机科学中，最普通的方法是测量算法在<strong>最坏情况</strong>下的水平和在<strong>平均情况</strong>下的水平。</p>
+<p>最坏情况下的测量定义如下：</p>
+<script type="math/tex; mode=display">WC_A(n)=\max_{x\in \Omega_n}{T_A[{\bf x}]}</script><p>至于平均情况下的测量则需要更多的参数。在每个平均情况下的测量，首先要确定输入的分布，假设输入服从这样的分布，然后测量算法的期望表现。令$S$表示每个$\Omega_n$的分布，那么依据$S$平均情况下测量的定义如下：</p>
+<script type="math/tex; mode=display">Ave_A^S(n)=E_{x\in_S\Omega_n}[T_A[{\bf x}]]</script><p>其中我们用<script type="math/tex">{\bf x}\in_S\Omega_n</script>表示<script type="math/tex">\bf{x}</script>是在<script type="math/tex">\Omega_n</script>中依据<script type="math/tex">S</script>随机选取的。</p>
+<h2 id="传统的分析的不足之处"><a href="#传统的分析的不足之处" class="headerlink" title="传统的分析的不足之处"></a>传统的分析的不足之处</h2><p>低的最坏复杂度是一个算法重要标准。当最坏复杂度很低的时候，它保证了算法的表现在任何输入下都会很好。有一个在最坏情况下表现很好的算法解决了很多的问题。</p>
+<p>然而，依旧有很多问题需要被解决在实际中，而这些问题我们不知道有很好的最坏复杂度的算法。取而代之的是很多科学家和工程师选择了启发式的算法去解决这些问题。很多这些算法在实际中工作的很好，尽管有一些情况下他们工作的不好，甚至是指数级的。</p>
+<p>【有空翻译】</p>
+<h2 id="平滑分析：对实际数据建立模型"><a href="#平滑分析：对实际数据建立模型" class="headerlink" title="平滑分析：对实际数据建立模型"></a>平滑分析：对实际数据建立模型</h2><p>由于决定实际分布是十分困难的，我们选择另一种方式去对实际数据建立模型。其中比较基础的idea是识别实际数据的特性，确定一个识别这些特性并严密地分析算法在这些输入下的表现的输入模型。</p>
 
     
   </div>
