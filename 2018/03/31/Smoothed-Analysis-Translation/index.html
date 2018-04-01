@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-03-31T17:01:55.037Z">
+<meta property="og:updated_time" content="2018-04-01T08:38:32.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -167,7 +167,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析"><span class="toc-text">传统的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析的不足之处"><span class="toc-text">传统的分析的不足之处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑分析：对实际数据建立模型"><span class="toc-text">平滑分析：对实际数据建立模型</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析"><span class="toc-text">传统的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析的不足之处"><span class="toc-text">传统的分析的不足之处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑分析：对实际数据建立模型"><span class="toc-text">平滑分析：对实际数据建立模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#平滑分析的例子"><span class="toc-text">平滑分析的例子</span></a></li></ol>
   </div>
 
 
@@ -238,7 +238,22 @@
 <p>然而，依旧有很多问题需要被解决在实际中，而这些问题我们不知道有很好的最坏复杂度的算法。取而代之的是很多科学家和工程师选择了启发式的算法去解决这些问题。很多这些算法在实际中工作的很好，尽管有一些情况下他们工作的不好，甚至是指数级的。</p>
 <p>【有空翻译】</p>
 <h2 id="平滑分析：对实际数据建立模型"><a href="#平滑分析：对实际数据建立模型" class="headerlink" title="平滑分析：对实际数据建立模型"></a>平滑分析：对实际数据建立模型</h2><p>由于决定实际分布是十分困难的，我们选择另一种方式去对实际数据建立模型。其中比较基础的idea是识别实际数据的特性，确定一个识别这些特性并严密地分析算法在这些输入下的表现的输入模型。</p>
-
+<p>平滑分析向这一方向迈出了一步，它观察到实际数据通常会受到一些随机噪声的影响。</p>
+<p>【三个例子】</p>
+<p>严格地说，每个输入的生成经过了一个有两个阶段的模型：在第一个阶段，一个数据生成，在第二个阶段，这个数据收到了一些轻微扰动。这个经受过扰动的数据最后作为算法的输入。</p>
+<p>因此在平滑分析中，我们假设一个算法的输入受到了随机的扰动。定义平滑测量(smooted measure)表示在扰动数据下的期望表现。定义平滑复杂度（smoothed complexity）表示所有的输入数据中平滑测量的最大值。</p>
+<p>具体而言，考虑这样的情况<script type="math/tex">\Omega_n={\bf R}^n</script>，也计算几何中的输入相同。对这样的连续的输入和应用，高斯分布（也就是正态分布）提供了噪声或扰动的分布。</p>
+<p>回忆单因子高斯分布（也就是平均值<script type="math/tex">\mu=0</script>，标准差<script type="math/tex">\sigma</script>不确定）：</p>
+<script type="math/tex; mode=display">\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2\sigma^2}}</script><p>其中标准差衡量了扰动的程度。对于一个向量<script type="math/tex">\bar {\bf x}\in {\bf R}^n</script>，经过高斯扰动后的向量<script type="math/tex">{\bf x}={\bf\bar x}+{\bf g}</script>，其中<script type="math/tex">g</script>是一个方差为<script type="math/tex">\sigma</script>的高斯随机向量。</p>
+<p><strong>定义1</strong>(Smoothed Complexity平滑复杂度，下称SC). 假设$A$是一个输入为<script type="math/tex">\Omega_n={\bf R}^n</script>的算法。那么算法$A$在$\sigma$-Gaussian扰动下的Smoothed Complexity为</p>
+<script type="math/tex; mode=display">Smoothed^\sigma_A(n)=\max_{\bar x\in [-1,1]^n}{\textbf{E}_g[T_A({\bf \bar x}+{\bf g})]}</script><p>其中<script type="math/tex">g</script>是一个方差为<script type="math/tex">\sigma</script>的高斯随机向量。这个最大值是最坏初始输入下的期望效率。</p>
+<p>SC衡量了一个算法在大小为$n$、扰动程度为$\sigma$的数据下的表现。通过改变$\sigma$从0到无穷，我们可以利用平滑分析计算最坏情况和平均情况之间的情况。当$\sigma=0$的时候，这个式子就是最坏情况下的分析。当$\sigma$不断变大，式子就变了平均情况下的分析。但我们通常更关心$\sigma$相对于<script type="math/tex">||{\bf \bar x}||</script>较小的情况，这样<script type="math/tex">{\bf \bar x}+{\bf g}</script>会被看作<script type="math/tex">\bf \bar x</script>的轻微扰动。对<script type="math/tex">\sigma</script>的依赖非常重要，在工作中经常会显示出噪音会让问题变得更容易解决。</p>
+<p><strong>定义2</strong>(Polynomial smoothed complexity多项式平滑复杂度，下称PSC). 如果存在正常量<script type="math/tex">n_0,\sigma_0,c,k_1,and~k_2</script>满足<script type="math/tex">\forall n\geqslant n_0~and~0\leqslant\sigma\leqslant\sigma_0</script>,</p>
+<script type="math/tex; mode=display">Smoothed^\sigma_A(n)\leqslant c\cdot\sigma^{-k_2}\cdot n^{k_1}</script><p>通过马尔可夫不等式，如果一个算法$A$有平滑复杂度$T(n,\sigma)$，那么</p>
+<script type="math/tex; mode=display">\max_{\bar x\in[-1,1]^n}{\textbf{Pr}_g[T_A({\bf \bar x}+{\bf g})}\leqslant \delta^{-1}T(n,\sigma)]\geqslant 1-\delta</script><p>因此，如果算法$A$有PSC，那么对于任意$\bf\bar x$，有至少$(1-\delta)$的概率能在带有随机扰动的输入下在多项式参数为$n,\frac{1}{\sigma},\frac{1}{\delta}$的时间内解决问题。然而这并不意味$A$的SC就是$O(T(n,\sigma))$。Blum和Dunagan以及接下来的Beier和Vöcking提出了PSC的松散形式。</p>
+<p><strong>定义3</strong>(Probably polynomial smoothed complexity，下称PPSC). 如果存在正常量<script type="math/tex">n_0,\sigma_0,c,a</script>满足<script type="math/tex">\forall n\geqslant n_0~and~0\leqslant\sigma\leqslant\sigma_0</script>,</p>
+<script type="math/tex; mode=display">\max_{\bar x\in[-1,1]^n}{\textbf{E}_g[T_A({\bf \bar x}+{\bf g})^\alpha]}\leqslant c\cdot\sigma^{-1}\cdot n</script><p>这表明，尽管定义1表明他们的复杂度是无界的，但是一些算法可能具有PPSC。</p>
+<h1 id="平滑分析的例子"><a href="#平滑分析的例子" class="headerlink" title="平滑分析的例子"></a>平滑分析的例子</h1>
     
   </div>
 </article>
