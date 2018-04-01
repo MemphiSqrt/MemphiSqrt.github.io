@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-04-01T08:38:32.205Z">
+<meta property="og:updated_time" content="2018-04-01T11:03:54.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -167,7 +167,7 @@
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析"><span class="toc-text">传统的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析的不足之处"><span class="toc-text">传统的分析的不足之处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑分析：对实际数据建立模型"><span class="toc-text">平滑分析：对实际数据建立模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#平滑分析的例子"><span class="toc-text">平滑分析的例子</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#算法的行为"><span class="toc-text">算法的行为</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析"><span class="toc-text">传统的分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统的分析的不足之处"><span class="toc-text">传统的分析的不足之处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平滑分析：对实际数据建立模型"><span class="toc-text">平滑分析：对实际数据建立模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#平滑分析的例子"><span class="toc-text">平滑分析的例子</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数学规划"><span class="toc-text">数学规划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线性规划"><span class="toc-text">线性规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Quasi-Concave-Minimization-QCM"><span class="toc-text">Quasi-Concave Minimization(QCM)</span></a></li></ol></li></ol></li></ol>
   </div>
 
 
@@ -218,7 +218,7 @@
       <blockquote>
 <p>我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。<br>                   ————Donald E. Knuth, “Theory and Practice”,<br>Theoretical Computer Science, 1991.</p>
 </blockquote>
-<p>算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成功。然而，一个工作的很好的算法并不一定能在另一个地方表现的很好。带着为了提供有理论保证的算法，理论科学家同样设计和分析算法。传统的理论计算机科学试图证明一个算法在最坏情况下表现优异：如果一个算法可以被证明在最坏情况下表现优异，那么这种算法可以被自信的运用于每一个可以运用的领域。然而，有很多算法可以在实践中工作的很好，但是并不能在最坏情况下有好的表现。<strong>平滑分析</strong>提供了一种理论框架去解释为什么这些算法可以在实践中工作的很好。</p>
+<p>算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成功。然而，一个工作的很好的算法并不一定能在另一个地方表现的很好。带着为了提供有理论保证的算法的目的，理论科学家同样设计和分析算法。传统的理论计算机科学试图证明一个算法在最坏情况下表现优异：如果一个算法可以被证明在最坏情况下表现优异，那么这种算法可以被自信的运用于每一个可以运用的领域。然而，有很多算法可以在实践中工作的很好，但是并不能在最坏情况下有好的表现。<strong>平滑分析</strong>提供了一种理论框架去解释为什么这些算法可以在实践中工作的很好。</p>
 <p>衡量算法的标准往往是一个算法的运行时间，表现为一个函数解决一定规模的输入。一个算法需要面对差异巨大的输入，有些可以非常的不规则。一些算法可以在线性的时间里解决所有输入，一些需要花费平方级别乃至更高的多项式的时间，而有些则需要花费指数级别的时间解决问题。</p>
 <p>传统上，一个算法的时间复杂度是通过算法在最坏情况下的表现来确定的。如果一个输入能够触发算法指数级别的运行时间，这个算法就会被称作指数级的算法。一个多项式级别的算法会在所有输入下通过多项式级别的时间去解决问题。多项式级的算法大多被视为高效的，我们跟喜欢花费时间在多项式级别、甚至线性的算法。</p>
 <p>如果所有算法都可以很快的在多项式级别内出解，那将是很完美的。但是在很多情况下，<strong>一个不足够好的算法在理论评估和实际表现上差异巨大</strong>。</p>
@@ -253,7 +253,14 @@
 <script type="math/tex; mode=display">\max_{\bar x\in[-1,1]^n}{\textbf{Pr}_g[T_A({\bf \bar x}+{\bf g})}\leqslant \delta^{-1}T(n,\sigma)]\geqslant 1-\delta</script><p>因此，如果算法$A$有PSC，那么对于任意$\bf\bar x$，有至少$(1-\delta)$的概率能在带有随机扰动的输入下在多项式参数为$n,\frac{1}{\sigma},\frac{1}{\delta}$的时间内解决问题。然而这并不意味$A$的SC就是$O(T(n,\sigma))$。Blum和Dunagan以及接下来的Beier和Vöcking提出了PSC的松散形式。</p>
 <p><strong>定义3</strong>(Probably polynomial smoothed complexity，下称PPSC). 如果存在正常量<script type="math/tex">n_0,\sigma_0,c,a</script>满足<script type="math/tex">\forall n\geqslant n_0~and~0\leqslant\sigma\leqslant\sigma_0</script>,</p>
 <script type="math/tex; mode=display">\max_{\bar x\in[-1,1]^n}{\textbf{E}_g[T_A({\bf \bar x}+{\bf g})^\alpha]}\leqslant c\cdot\sigma^{-1}\cdot n</script><p>这表明，尽管定义1表明他们的复杂度是无界的，但是一些算法可能具有PPSC。</p>
-<h1 id="平滑分析的例子"><a href="#平滑分析的例子" class="headerlink" title="平滑分析的例子"></a>平滑分析的例子</h1>
+<h1 id="平滑分析的例子"><a href="#平滑分析的例子" class="headerlink" title="平滑分析的例子"></a>平滑分析的例子</h1><p>在这一部分，我们会给出一些平滑分析的例子。我们组织了五个部分：数学规划，机器学习，数值分析，离散数学以及组合优化。对于每个例子，我们会给出问题的定义，陈述最坏复杂度，解释扰动模型，并且陈述在扰动模型下的SC。</p>
+<h2 id="数学规划"><a href="#数学规划" class="headerlink" title="数学规划"></a>数学规划</h2><p>一个数学规划中的典型问题是在一系列约束下寻找一个函数的最优解。由于这个问题在经济学、工业和军事计划很重要，很多最优算法和启发式算法得到了发展，并且应用在实际问题中。因此，这个领域提供了大量算法去应用平滑分析。</p>
+<h3 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h3><p>线性规划是最基础的最优化问题。最常用来解决线性规划问题的算法是Simplex单纯形算法以及内点算法。</p>
+<p>单纯形算法，由Dantzig在1951年第一次提出，属于迭代算法。大部分迭代算法有两个部分（TIP：实际上在介绍单纯形算法）：第一部分是确定给出的线性程序是否不可行，在目标方向无界，或者可行，在目标方向有界（TIP：就是判断最优值是否存在），在这种情况下，在合法区域上的某个顶点$v_0$会被计算出来。第二部分是迭代的：在第$i$次迭代中，算法会去寻找顶点<script type="math/tex">v_{i-1}</script>的相邻顶点$v_i$，其中$v_i$顶点有着更优的目标值。当不存在更优的相邻顶点的时候，算法终止并返回<script type="math/tex">v_{i-1}</script>。一些单纯形算法在转轴(pivot)操作上不一样，当有多个相邻顶点比当前顶点更优的时候。一些转轴策略已经被提出。然而几乎所有现存的转轴策略在最坏情况下都是指数复杂度的！</p>
+<p>Spielman和Teng思考了应用shadow-vertex转轴策略的单纯形算法的SC，并由Gass和Saaty发展。他们使用了高斯扰动模型去生成输入数据，并且证明了这种算法的SC是多项式级别的。Vershynin改进了他们的结果，其中SC是</p>
+<script type="math/tex; mode=display">O(\max\{n^5\log^2m,n^9\log^4n,n^3\sigma^{-4}\})</script><p>之后Blum和Dunagan分析了其他线性规划算法例如内点算法以及感知器算法。</p>
+<h3 id="Quasi-Concave-Minimization-QCM"><a href="#Quasi-Concave-Minimization-QCM" class="headerlink" title="Quasi-Concave Minimization(QCM)"></a>Quasi-Concave Minimization(QCM)</h3><p>另一个基本的最优化问题是QCM。定义函数<script type="math/tex">f:\textbf{R}^n\rightarrow \textbf{R}</script>是伪凹的（quasi-concave），当且仅当$\forall \gamma$，<script type="math/tex">{\bf L}_\gamma=\{x|f(x)\geqslant \gamma\}</script>是凸集。</p>
+
     
   </div>
 </article>
