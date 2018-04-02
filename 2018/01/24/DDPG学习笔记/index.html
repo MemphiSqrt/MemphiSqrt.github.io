@@ -30,7 +30,7 @@ pytorch-gym
 DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$status=(x_1,x_2,…,x_n)$，我们要对他作出合适的$action$的选择。
 先介绍一下DDPG的前身，DQN算法，可以对有限的$action$作出">
 <meta property="og:image" content="http://yoursite.com/images/ddpg_01.png">
-<meta property="og:updated_time" content="2018-01-25T05:58:46.000Z">
+<meta property="og:updated_time" content="2018-04-02T13:36:30.491Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DDPG学习笔记">
 <meta name="twitter:description" content="前言本文主要记录一下自己在megvii折腾RL（主要是DDPG）的经历 （等等我为什么在megvii折腾RL？）
@@ -240,7 +240,8 @@ DDPG可以做什么和传统RL算法一样，对于一个$n$维状态的输入$s
 <p>于是考虑加入critic network。加入的critic network和DQN一样，会对$(status,action)$进行打分，我们试图通过这个打分来计算actor network的loss。在这之前，我们需要考虑一下怎么更新critic network。</p>
 <p>方法和DQN很类似，保存每一次的状态$status$和作出的选择$action$以及得到的$reward$和下一次的$next~status$。把这些数据作为今后训练critic network的数据集，每次从中随机抽取一些，计算出标准reward和critic产生的reward的差异，得到critic network的loss，这样就能更新critic network了。</p>
 <p>那么怎么更新actor network呢？方法也很直观，直接拿更新的critic network对actor network作出的$action$进行打分，打分是越高越好，那么把打分取个负，就当作loss了。</p>
-<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><hr>
+<script type="math/tex; mode=display">\spadesuit</script>
     
   </div>
 </article>
