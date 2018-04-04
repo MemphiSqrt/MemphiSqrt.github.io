@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-04-02T13:35:49.954Z">
+<meta property="og:updated_time" content="2018-04-04T14:02:47.234Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -236,7 +236,7 @@
 <script type="math/tex; mode=display">Ave_A^S(n)=E_{x\in_S\Omega_n}[T_A[{\bf x}]]</script><p>其中我们用<script type="math/tex">{\bf x}\in_S\Omega_n</script>表示<script type="math/tex">\bf{x}</script>是在<script type="math/tex">\Omega_n</script>中依据<script type="math/tex">S</script>随机选取的。</p>
 <h2 id="传统的分析的不足之处"><a href="#传统的分析的不足之处" class="headerlink" title="传统的分析的不足之处"></a>传统的分析的不足之处</h2><p>低的最坏复杂度是一个算法重要标准。当最坏复杂度很低的时候，它保证了算法的表现在任何输入下都会很好。有一个在最坏情况下表现很好的算法解决了很多的问题。</p>
 <p>然而，依旧有很多问题需要被解决在实际中，而这些问题我们不知道有很好的最坏复杂度的算法。取而代之的是很多科学家和工程师选择了启发式的算法去解决这些问题。很多这些算法在实际中工作的很好，尽管有一些情况下他们工作的不好，甚至是指数级的。</p>
-<p>【有空翻译】</p>
+<p>为了克服这种困难，平均情况下的分析被提了出来。在平均情况分析下， 一个算法的期望运行时间被计算了出来。但是这需要拥有读入数据非常理想的分布，很多情况下这是很困难的，而且这种分布在不同应用下通常是差别很大的。</p>
 <h2 id="平滑分析：对实际数据建立模型"><a href="#平滑分析：对实际数据建立模型" class="headerlink" title="平滑分析：对实际数据建立模型"></a>平滑分析：对实际数据建立模型</h2><p>由于决定实际分布是十分困难的，我们选择另一种方式去对实际数据建立模型。其中比较基础的idea是识别实际数据的特性，确定一个识别这些特性并严密地分析算法在这些输入下的表现的输入模型。</p>
 <p>平滑分析向这一方向迈出了一步，它观察到实际数据通常会受到一些随机噪声的影响。</p>
 <p>【三个例子】</p>
