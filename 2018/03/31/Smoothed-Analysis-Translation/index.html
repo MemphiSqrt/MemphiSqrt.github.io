@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-04-04T14:02:47.234Z">
+<meta property="og:updated_time" content="2018-04-04T14:39:47.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -267,7 +267,7 @@
 <h3 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h3><p>机器学习的一个基本问题时k-means分类：把一个$d$维向量集合<script type="math/tex">Q=\{q_1,...,q_n\}</script>分成$k$个集合<script type="math/tex">\{Q_1,...,Q_k\}</script>，要求集合内方差</p>
 <script type="math/tex; mode=display">V=\sum_{i=1}^{k}\sum_{q_j\in Q_i}{||q_j-\mu(Q_i)||^2}</script><p>最小化，其中<script type="math/tex">\mu(Q_i)</script>为$Q_i$的平均数。</p>
 <p>一个被广泛应用的算法是Lloyd算法(IEEE Transaction on Information Theory, 1982)。流程如下：首先任选$k$个节点作为$k$个集合的中心，然后用建立V图（TIP：将平面氛围$k$块，每块包含一个中心，每块中的任意一点到该块中心的距离比到其他块中心的距离都要短），然后对于每一块找到$Q$中所有属于这一块的点，找到它的中心点$\mu(Q_i)$，重新做一遍V图，一直迭代下去。</p>
-<p>对于这个算法，有两个问题，第一个就是，需要迭代多少次才能到停止？第二个就是，这个算法找到的解有多优？平滑分析曾被用来分析第一个问题。Arthur和Vassilvitskii证明了在最坏情况下，Lloyd算法需要<script type="math/tex">2^{\Omega(\sqrt{n})}</script>次迭代。但是SC是多项式级别的：<script type="math/tex">\max\{n^k,\sigma_{-1}\}</script>。Manthey和Röglin最近把这个上界缩小到了<script type="math/tex">\max\{n^{\sqrt{k}},\sigma_{-1}\}</script>。</p>
+<p>对于这个算法，有两个问题，第一个就是，需要迭代多少次才能到停止？第二个就是，这个算法找到的解有多优？平滑分析曾被用来分析第一个问题。Arthur和Vassilvitskii证明了在最坏情况下，Lloyd算法需要<script type="math/tex">2^{\Omega(\sqrt{n})}</script>次迭代。但是SC是多项式级别的：<script type="math/tex">\max\{n^k,\sigma_{-1}\}</script>。Manthey和Röglin最近把这个上界缩小到了<script type="math/tex">\max\{n^{\sqrt{k}},\sigma^{-1}\}</script>。</p>
 <h3 id="感知器、间隔、以及支持向量机"><a href="#感知器、间隔、以及支持向量机" class="headerlink" title="感知器、间隔、以及支持向量机"></a>感知器、间隔、以及支持向量机</h3><p>Blum和Dunagan对感知器的线性规划算法的分析隐含了对机器学习的兴趣。最普通的感知器解决了一个基本问题：给出一些点<script type="math/tex">x_1,...,x_n\in \textbf{R}^d</script>和一些label <script type="math/tex">b_1,...,b_n\in\{\pm 1\}^n</script>，找到一个超平面把这些点分为两种label，或者确定不存在这样的超平面。在平滑模型下，$x_1,…,x_n$经过了$\sigma$-高斯扰动，Blum和Dunagan证明了感知器算法有SC是多项式级别的。他们的证明来自一个证明，即如果正面点可以与负面点分开，那么它们可能会被很大的间隔分离。 也就是说，可能存在一个平面，将没有点过于靠近分离平面的点分开。</p>
 <p>众所周知，感知器算法在这种情况下很快收敛。 而且，这个间隔恰恰是支持向量机最大化的。</p>
 <h3 id="PAC-Learning"><a href="#PAC-Learning" class="headerlink" title="PAC Learning"></a>PAC Learning</h3><p>Probably approximately correct learning (PAC learn- ing)是一个由Valiant提出的的机器学习模型，学习者被提供来自给定分布的标记示例的多项式数字，然后必须产生高正确率的分类器。在标准PAC learning中，绘制的示例分布是固定的。最近，Kalai和Teng对被扰动过的输入分布应用平滑分析。他们证明了在扰动的分布下，多项式级别的决策树可以被PAC在多项式时间内学会。相比之下，在不扰动的分布下，即使是常量大小的决策树，PAC也可能不能在多项式时间内学会。</p>
