@@ -29,7 +29,7 @@
 介绍Treap=Tree+HeapTreap是一颗同时">
 <meta property="og:image" content="http://yoursite.com/images/1.png">
 <meta property="og:image" content="http://yoursite.com/images/2.png">
-<meta property="og:updated_time" content="2018-04-02T13:36:20.828Z">
+<meta property="og:updated_time" content="2018-04-06T16:25:00.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="非旋转Treap及可持久化[Merge,Split]">
 <meta name="twitter:description" content="简介Treap，一种表现优异的BST
@@ -274,7 +274,7 @@
 <li><p>询问一个节点是第几大。</p>
 <p>即所有自下而上的操作都不能实现。<br>那我们是否可以考虑加上father节点又能实现可持久化？答案是可以的！<br>主席给了我一种方法：</p>
 </li>
-<li><p>对每一个节点建立一个有序表，记录每次修改的版本信息，当儿子走向父亲的时候就可以在父亲的表中找到需要的信息，对于有序表的实现，我们可以在全局开一个hash表存储，这样复杂度依然是期望$\log n的。</p>
+<li><p>对每一个节点建立一个有序表，记录每次修改的版本信息，当儿子走向父亲的时候就可以在父亲的表中找到需要的信息，对于有序表的实现，我们可以在全局开一个hash表存储，这样复杂度依然是期望$\log n$的。</p>
 <p>但是有个问题，我们必须要知道father节点恰好的修改时间，而我们往往不知道，往往需要寻找的是第K次修改之前的节点，怎么办呢？<br>还是可以的，我们可以牺牲一个$\log$的复杂度在每个节点上建立一个线段树查询前驱。<br>然而我们还可以猎奇一点，现在我们的任务是：找到父亲的表中的第K次修改之前的节点，即寻找前驱。</p>
 </li>
 <li><p>寻找前驱。</p>
