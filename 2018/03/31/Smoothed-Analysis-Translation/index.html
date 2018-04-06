@@ -25,7 +25,7 @@
 <meta property="og:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
 
 算法是用来详细描述计算任务的方式。工程师和实验者设计和应用算法，并且归纳的思考算法是否会在工作和实践中取得成">
-<meta property="og:updated_time" content="2018-04-05T09:07:09.534Z">
+<meta property="og:updated_time" content="2018-04-06T16:12:21.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Smoothed Analysis [Translation]">
 <meta name="twitter:description" content="我的经验总是不断证实我之前的观点：最好的理论总是从实践中得到灵感，最好的实践总是来源于理论。                   ————Donald E. Knuth, “Theory and Practice”,Theoretical Computer Science, 1991.
@@ -225,7 +225,6 @@
 <p>一般人普遍相信在实践中的输入往往是比最坏情况下的例子更重要的。举个例子，很有名的Knapsack问题，这个问题是指，对于$n$个数，是否能够分成两个和相等的部分，这个问题没有多项式算法，除非NP=P。NBC著名新闻评论员Tim Russert在2008大选的时候提出了共和党和民主党候选人有最后同票的可能。也就是说，他解决了51个元素（TIP：美国有51个州）的Snapsack问题，而且是在很短的时间内通过手动计算得到的，也就是说这很可能没有使用我们熟知的“伪多项式动态规划”（TIP：即背包问题，背包问题的复杂度与元素大小有关，称之为“伪多项式”算法）解决了Knapsack问题！</p>
 <p>另外，著名的单纯形（Simplex）算法是一个经典的例子，单纯形算法在在实践的时候表现的非常好，但是在最坏情况下表现的很差。单纯形算法解决了线性规划问题，举个例子，对于以下公式：</p>
 <script type="math/tex; mode=display">\max {\bf c}^T{\bf x}~~\text{subject to}~~{\bf Ax}\leqslant {\bf b}</script><p>其中$A$是一个$m\times n$的矩阵，$b$是一个长度为$m$的向量，而$c$是一个长度为$n$的向量。在最坏情况下，单纯形算法需要指数级的时间。</p>
-<p>【剩下部分有空来翻译】</p>
 <h1 id="算法的行为"><a href="#算法的行为" class="headerlink" title="算法的行为"></a>算法的行为</h1><p>假设$A$是一种算法，用来解决问题$P$，我们让$T_A[{\bf x}]$来表示算法$A$在输入为${\bf x}$时运行时间。然后我们可以用基于输入的衡量方法$T_{A_1}[{\bf x}]$和$T_{A_2}[{\bf x}]$来决定$A_1$和$A_2$两个算法哪一个更加高效。</p>
 <p>假设$\Omega$表示两个输入$\bf x$和$\bf y$，然后基于输入的衡量方法对于$A$决定了一个二维向量<script type="math/tex">(T_{A}[{\bf x}],T_{A}[{\bf y}])</script>。可能会出现<script type="math/tex">T_{A_1}[{\bf x}]<T_{A_2}[{\bf x}]</script>但是 <script type="math/tex">T_{A_1}[{\bf y}]>T_{A_2}[{\bf y}]</script>。</p>
 <p>然而，严格的来说，这两种算法并不能比较。更多时候，输入应该更多更复杂一些。这种instance-based complexity measure $T_A[\cdot]$决定了一个$|\Omega|$维的向量（当$\Omega$是有限的时候）。更一般的，可以看作一个函数从$\Omega$映射到${\bf R}_+^1$，但是很粗糙。为了比较两个算法，我们需要一些更加精确复杂度测量方法。</p>
@@ -280,7 +279,15 @@
 <p>（？）Haimovich和Adler考虑了如下的概率分析：给出一个线性程序<script type="math/tex">\mathcal{L}=({\bf A},{\bf b},{\bf c})</script>，他定义<script type="math/tex">\mathcal{L}</script>的期望复杂度EC为每个约束条件的不等号均匀剔除时单纯形算法的预期复杂度。 他们证明了最坏情况下的L的预期复杂性是多项式。</p>
 <h2 id="对于特殊输入的算法设计和分析"><a href="#对于特殊输入的算法设计和分析" class="headerlink" title="对于特殊输入的算法设计和分析"></a>对于特殊输入的算法设计和分析</h2><p>概率方法不是表示实际输入的唯一方法。 很多工作花费了大量时间去设计和分析确定性的实际输入。我们将提到一些激发我们的例子。</p>
 <p>In parallel scienti c computing, one may often assume that the input graph is a well-shaped  nite element mesh. In VLSI layout, one often only considers graphs that are planar or nearly planar. In geometric modeling, one may assume that there is an upper bound on the ratio among the distances between points. In Web analysis, one may assume that the input graph satis es some powerlaw degree distribution or some small-world properties. When analyzing hash functions, one may assume that the data being hashed has some nonnegligible entropy.</p>
-<h2 id="平滑分析的局限性"><a href="#平滑分析的局限性" class="headerlink" title="平滑分析的局限性"></a>平滑分析的局限性</h2><h2 id="基于扰动和平滑分析的算法设计"><a href="#基于扰动和平滑分析的算法设计" class="headerlink" title="基于扰动和平滑分析的算法设计"></a>基于扰动和平滑分析的算法设计</h2><hr>
+<h2 id="平滑分析的局限性"><a href="#平滑分析的局限性" class="headerlink" title="平滑分析的局限性"></a>平滑分析的局限性</h2><p>平滑分析的目的是用来解释为什么一些算法在实际运用中的表现比在最坏情况下要好很多。但是并不能对所有的问题都给出非常好的解释，因为很难抓住输入实例的关键方面。</p>
+<p>例如计算市场均衡问题，平滑复杂度和最坏复杂度基本一样。</p>
+<p>因此，理解实际情况下算法行为的一个关键步骤是要建立一个可分析的模型，这个模型能够抓住实例输入的一些关键方面。</p>
+<h2 id="基于扰动和平滑分析的算法设计"><a href="#基于扰动和平滑分析的算法设计" class="headerlink" title="基于扰动和平滑分析的算法设计"></a>基于扰动和平滑分析的算法设计</h2><p>希望这种扰动给算法设计带来一些灵感</p>
+<p>例如在计算几何的某些算法中，通过实现可变精度算术，来正确处理由几何退化产生的异常。但是，这种退化情况通常只有极低概率才会发生。</p>
+<p>一个例子：计算<script type="math/tex">{\bf Ax}={\bf b}</script></p>
+<p>首先使用标准的列主元高斯消元法，得到结果<script type="math/tex">x^*</script>，如果<script type="math/tex">||{\bf b}-{\bf Ax}^*||</script>足够小，那么<script type="math/tex">x^*</script>即为所求</p>
+<p>否则，我们可以设一个<script type="math/tex">\varepsilon</script>，产生一个新的线性系统<script type="math/tex">({\bf A}+ \varepsilon {\bf G}){\bf y}={\bf b}</script>，其中<script type="math/tex">{\bf G}</script>是标准正态分布的矩阵。在<script type="math/tex">\varepsilon \ll \kappa({\bf 𝐴})</script>的情况下，那么这个线性系统的结果和原来的结果误差会在理想的范围之内。</p>
+<hr>
 <script type="math/tex; mode=display">\spadesuit</script>
     
   </div>
