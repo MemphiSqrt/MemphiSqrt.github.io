@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Memphis,学生,c++,python" />
+    <meta name="keywords" content="Java," />
   
 
   <meta name="description" content="写在最前面
@@ -20,9 +20,12 @@
 本文主要介绍WebConnect部分，不包括验证码识别和安卓界面的设计。
 project地址：https://github.com/MemphiSqrt/Elective-Master
 
-背景在北大选课大致分为两轮：
+目标
+实现在线登录
 
-第一轮预选，大家通过投“意愿点">
+实现验证码自动识别
+
+实现多课程自动刷课">
 <meta property="og:type" content="article">
 <meta property="og:title" content="点歪技能树：用Java.net制作安卓端北大刷课机">
 <meta property="og:url" content="http://yoursite.com/2018/05/26/点歪技能树：用Java-net制作北大刷课机/index.html">
@@ -32,11 +35,15 @@ project地址：https://github.com/MemphiSqrt/Elective-Master
 本文主要介绍WebConnect部分，不包括验证码识别和安卓界面的设计。
 project地址：https://github.com/MemphiSqrt/Elective-Master
 
-背景在北大选课大致分为两轮：
+目标
+实现在线登录
 
-第一轮预选，大家通过投“意愿点">
+实现验证码自动识别
+
+实现多课程自动刷课">
 <meta property="og:image" content="http://yoursite.com/images/ji01.png">
-<meta property="og:updated_time" content="2018-05-26T08:57:55.832Z">
+<meta property="og:image" content="http://yoursite.com/images/WechatIMG129.jpeg">
+<meta property="og:updated_time" content="2018-05-26T10:26:22.788Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="点歪技能树：用Java.net制作安卓端北大刷课机">
 <meta name="twitter:description" content="写在最前面
@@ -44,9 +51,12 @@ project地址：https://github.com/MemphiSqrt/Elective-Master
 本文主要介绍WebConnect部分，不包括验证码识别和安卓界面的设计。
 project地址：https://github.com/MemphiSqrt/Elective-Master
 
-背景在北大选课大致分为两轮：
+目标
+实现在线登录
 
-第一轮预选，大家通过投“意愿点">
+实现验证码自动识别
+
+实现多课程自动刷课">
 <meta name="twitter:image" content="http://yoursite.com/images/ji01.png">
 
   
@@ -184,7 +194,7 @@ project地址：https://github.com/MemphiSqrt/Elective-Master
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-net-工具介绍"><span class="toc-text">Java.net 工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立网页连接"><span class="toc-text">建立网页连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置请求头"><span class="toc-text">设置请求头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何设置请求头"><span class="toc-text">如何设置请求头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置cookie"><span class="toc-text">设置cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置浏览器"><span class="toc-text">设置浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置输入输出权限"><span class="toc-text">设置输入输出权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置时间限制"><span class="toc-text">设置时间限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置请求方法"><span class="toc-text">设置请求方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录"><span class="toc-text">登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#登录确认机制"><span class="toc-text">登录确认机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录中的trick"><span class="toc-text">登录中的trick</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trick-1"><span class="toc-text">trick.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trick-2"><span class="toc-text">trick.2</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-net-工具介绍"><span class="toc-text">Java.net 工具介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#建立网页连接"><span class="toc-text">建立网页连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置请求头"><span class="toc-text">设置请求头</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何设置请求头"><span class="toc-text">如何设置请求头</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置cookie"><span class="toc-text">设置cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置浏览器"><span class="toc-text">设置浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置输入输出权限"><span class="toc-text">设置输入输出权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置时间限制"><span class="toc-text">设置时间限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置请求方法"><span class="toc-text">设置请求方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#登录"><span class="toc-text">登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#登录确认机制"><span class="toc-text">登录确认机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#登录中的trick"><span class="toc-text">登录中的trick</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trick-1"><span class="toc-text">trick.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#trick-2"><span class="toc-text">trick.2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#爬课程"><span class="toc-text">爬课程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#验证码图片抓取"><span class="toc-text">验证码图片抓取</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多课程刷课"><span class="toc-text">多课程刷课</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#图片demo"><span class="toc-text">图片demo</span></a></li></ol>
   </div>
 
 
@@ -238,6 +248,17 @@ project地址：https://github.com/MemphiSqrt/Elective-Master
 <p>本文主要介绍WebConnect部分，不包括验证码识别和安卓界面的设计。</p>
 <p>project地址：<a href="https://github.com/MemphiSqrt/Elective-Master" target="_blank" rel="external">https://github.com/MemphiSqrt/Elective-Master</a></p>
 </blockquote>
+<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
+<li><p>实现在线登录</p>
+</li>
+<li><p>实现验证码自动识别</p>
+</li>
+<li><p>实现多课程自动刷课</p>
+</li>
+<li><p>实现课程信息查询</p>
+</li>
+</ul>
+<p>其中验证码的识别和安卓界面的制作分别交由<a href="https://github.com/warshallrho" target="_blank" rel="external">@warshallrho</a>和<a href="https://github.com/mrmrfan" target="_blank" rel="external">@mrmrfan</a>完成了</p>
 <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在北大选课大致分为两轮：</p>
 <ul>
 <li><p>第一轮预选，大家通过投“意愿点”表明意愿，而后加权随机选出选上课的人。</p>
@@ -293,7 +314,37 @@ project地址：https://github.com/MemphiSqrt/Elective-Master
 <p>网站制作者，你牛逼。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">conn = GetConn(HelperControlPage, cookieGet, <span class="string">"POST"</span>, <span class="keyword">true</span>);</div><div class="line">conn.connect();</div><div class="line">displayConnNoPrint(conn);</div><div class="line">conn.disconnect();</div></pre></td></tr></table></figure>
 <p>至此我们就完成了登录。</p>
-
+<h1 id="爬课程"><a href="#爬课程" class="headerlink" title="爬课程"></a>爬课程</h1><p>完成了登录以后，接下来的爬课程工作就类似于网络爬虫了，相比登录而言，这就没有什么令人头大的trick了，北大选课网也没有什么反爬虫机制，一般就是伪装成浏览器在网站上爬网页下来就行了。</p>
+<p>贴一下爬专业课的代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ----------------------   crawl education_plan_bk</span></div><div class="line"></div><div class="line">        System.out.println(<span class="string">"education_plan_bk crawling"</span>);</div><div class="line">        conn = GetConn(CurriculmFormPage, cookieKey, <span class="string">"GET"</span>, <span class="keyword">false</span>);</div><div class="line">        conn.setRequestProperty(<span class="string">"Referer"</span>, <span class="string">"http://elective.pku.edu.cn/elective2008/edu/pku/stu/elective/controller/help/HelpController.jpf"</span>);</div><div class="line">        conn.setRequestProperty(<span class="string">"Host"</span>, <span class="string">"http://elective.pku.edu.cn"</span>);</div><div class="line">        conn.setRequestProperty(<span class="string">"Accept-Encoding"</span>,<span class="string">"gzip, deflate"</span>);</div><div class="line">        conn.setRequestProperty(<span class="string">"Upgrade-Insecure-Requests"</span>,<span class="string">"1"</span>);</div><div class="line">        conn.connect();</div><div class="line">        OutputStreamWriter out = <span class="keyword">new</span> OutputStreamWriter(conn.getOutputStream(),<span class="string">"utf-8"</span>);</div><div class="line">        String requestStr = <span class="string">"wlw-radio_button_group_key%3A%7BactionForm.courseSettingType%7D=education_plan_bk"</span></div><div class="line">                +<span class="string">"&amp;%7BactionForm.courseID%7D="</span></div><div class="line">                +<span class="string">"&amp;%7BactionForm.courseName%7D="</span></div><div class="line">                +<span class="string">"&amp;wlw-select_key%3A%7BactionForm.deptID%7DOldValue=true"</span></div><div class="line">                <span class="comment">//+"&amp;wlw-select_key%3A%7BactionForm.deptID%7D=048"</span></div><div class="line">                +<span class="string">"&amp;wlw-select_key%3A%7BactionForm.courseDay%7DOldValue=true"</span></div><div class="line">                +<span class="string">"&amp;wlw-select_key%3A%7BactionForm.courseDay%7D="</span></div><div class="line">                +<span class="string">"&amp;wlw-select_key%3A%7BactionForm.courseTime%7DOldValue=true"</span></div><div class="line">                +<span class="string">"&amp;wlw-select_key%3A%7BactionForm.courseTime%7D="</span></div><div class="line">                +<span class="string">"&amp;wlw-checkbox_key%3A%7BactionForm.queryDateFlag%7DOldValue=false"</span></div><div class="line">                <span class="comment">//+"&amp;deptIdHide=048"</span></div><div class="line">                ;</div><div class="line">        out.write(requestStr);</div><div class="line">        out.flush();</div><div class="line">        out.close();</div><div class="line">        String nextPage = <span class="string">""</span>;</div><div class="line">        String prePage = CurriculmFormPage;</div><div class="line">        <span class="keyword">while</span>((nextPage = websiteScanning(conn)) != <span class="string">""</span>) &#123;</div><div class="line">            conn.disconnect();</div><div class="line">            nextPage = <span class="string">"http://elective.pku.edu.cn/"</span>+nextPage;</div><div class="line">            nextPage = nextPage.replace(<span class="string">"amp;"</span>, <span class="string">""</span>);</div><div class="line">            conn = WebIterator(prePage, nextPage);</div><div class="line">            prePage = nextPage;</div><div class="line">        &#125;</div><div class="line">        conn.disconnect();</div></pre></td></tr></table></figure>
+<h1 id="验证码图片抓取"><a href="#验证码图片抓取" class="headerlink" title="验证码图片抓取"></a>验证码图片抓取</h1><p>个人认为这个是除了登录之外第二坑的部分了，原因就在于，验证码图片这个东西每次读取都是不一样的，假如我拽一张图出来，虽然图变了，但是似乎这时候老验证码会失效，新的验证码输进去才有用。。</p>
+<p>归根结底应该还是cookie的问题，事实上这种问题在用浏览器实现刷课的方法时会非常令人困惑，因为浏览器会自动加载验证码图片，当你尝试去获得验证码的图片的时候其实是第二次获得了验证码图片，这个时候验证码就会改变了。</p>
+<p>于是我们利用Java.net，事实上可以很好的避免这个问题，我们爬下了网页源代码之后，不主动去加载图片，自然就不会改变验证码！</p>
+<p>另外顺带一提的，验证码的网址也有一个参数是随机数，而且这个随机数和之前登录跳转页面的随机数还不一样，之前的那个随机数是[0,1]之间的一个小数，现在这个随机数要*10000。。表示不懂网站制作人的脑回路。。。</p>
+<p>code</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">String srcPic = <span class="string">"http://elective.pku.edu.cn/elective2008/DrawServlet?Rand="</span>+String.valueOf(Math.random()*<span class="number">10000</span>);</div><div class="line">      HttpURLConnection conn = GetConn(srcPic, cookieKey, <span class="string">"GET"</span>, <span class="keyword">false</span>);</div><div class="line">      conn.setRequestProperty(<span class="string">"Referer"</span>, SupplyCancelPage);</div><div class="line">      conn.setRequestProperty(<span class="string">"Host"</span>, <span class="string">"elective.pku.edu.cn"</span>);</div><div class="line">      conn.setRequestProperty(<span class="string">"Accept-Encoding"</span>,<span class="string">"gzip, deflate"</span>);</div><div class="line">      conn.setRequestProperty(<span class="string">"Upgrade-Insecure-Requests"</span>,<span class="string">"1"</span>);</div><div class="line">      conn.connect();</div><div class="line">      String strCookie = conn.getHeaderField(<span class="string">"Set-Cookie"</span>);</div><div class="line">      BufferedImage picR = ImageIO.read(conn.getInputStream());</div><div class="line">      File picOut = <span class="keyword">new</span> File(<span class="string">"src/captcha/captcha.jpg"</span>);</div><div class="line">      ImageIO.write(picR, <span class="string">"jpg"</span>, picOut);</div><div class="line"></div><div class="line">      conn.disconnect();</div></pre></td></tr></table></figure>
+<p>TIP: 如果ImageIO在安卓上无法使用可以尝试其他文件读取方法。</p>
+<h1 id="多课程刷课"><a href="#多课程刷课" class="headerlink" title="多课程刷课"></a>多课程刷课</h1><p>相比而言，这就是一个纯粹的代码实现问题了，大概步骤为：</p>
+<ul>
+<li><p>接受要补选的课程列表作为参数</p>
+</li>
+<li><p>进入补退选界面</p>
+</li>
+<li><p>枚举需要补选的课程，一一查看课程状态</p>
+<ul>
+<li>若课程状态已满，刷新之</li>
+<li>若课程状态未满，补选之</li>
+</ul>
+</li>
+<li><p>枚举完毕，重新枚举，直到刷上课为止</p>
+</li>
+</ul>
+<p>需要注意的一点是，刷新课程的间隔下限是3s，低于这个返回的json不会返回任何东西！</p>
+<p>代码太长，有兴趣的同学可以自行去project里查看。</p>
+<h1 id="图片demo"><a href="#图片demo" class="headerlink" title="图片demo"></a>图片demo</h1><p><img src="/images/WechatIMG129.jpeg" alt="2"></p>
+<p>这是仅后端的展示，我们还有安卓app的视频demo，在课程pre展出后放出。</p>
+<hr>
+<script type="math/tex; mode=display">\spadesuit</script>
     
   </div>
 </article>
