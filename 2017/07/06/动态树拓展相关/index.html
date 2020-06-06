@@ -15,32 +15,21 @@
     <meta name="keywords" content="DSA," />
   
 
-  <meta name="description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
-Top-Tree简介 这是什么？
-  一种Link-Cut-Tree的拓展，以维护子树信息著称。
-  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
-  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
+  <meta name="description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。 Top-Tree简介 这是什么？   一种Link-Cut-Tree的拓展，以维护子树信息著称。   另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq   （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态树拓展相关">
-<meta property="og:url" content="http://yoursite.com/2017/07/06/动态树拓展相关/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/07/06/%E5%8A%A8%E6%80%81%E6%A0%91%E6%8B%93%E5%B1%95%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="Memphis">
-<meta property="og:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
-Top-Tree简介 这是什么？
-  一种Link-Cut-Tree的拓展，以维护子树信息著称。
-  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
-  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
+<meta property="og:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。 Top-Tree简介 这是什么？   一种Link-Cut-Tree的拓展，以维护子树信息著称。   另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq   （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
 <meta property="og:image" content="http://yoursite.com/images/3.png">
 <meta property="og:image" content="http://yoursite.com/images/4.png">
 <meta property="og:image" content="http://yoursite.com/images/5.png">
 <meta property="og:image" content="http://yoursite.com/images/6.png">
-<meta property="og:updated_time" content="2018-04-02T13:36:14.882Z">
+<meta property="article:published_time" content="2017-07-06T15:06:54.000Z">
+<meta property="article:modified_time" content="2018-04-02T13:36:14.882Z">
+<meta property="article:author" content="Memphis">
+<meta property="article:tag" content="DSA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="动态树拓展相关">
-<meta name="twitter:description" content="前言本文主要介绍Top-Tree、Euler-Tour-Tree+LCT和一种奇怪的未命名的动态树。
-Top-Tree简介 这是什么？
-  一种Link-Cut-Tree的拓展，以维护子树信息著称。
-  另说应该叫AAA树。事实上作者我也不是很懂这一套理论，反正叫Toptree大家都知道是啥，就这么叫了吧qwq
-  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区">
 <meta name="twitter:image" content="http://yoursite.com/images/3.png">
 
   
@@ -53,7 +42,9 @@ Top-Tree简介 这是什么？
 
 
   
-    <link rel="stylesheet" href="/css/personal-style.css">
+    
+<link rel="stylesheet" href="/css/personal-style.css">
+
   
 
   
@@ -93,9 +84,9 @@ Top-Tree简介 这是什么？
   
 
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
   
-</head>
+<meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
 
 <body>
 
@@ -207,7 +198,7 @@ Top-Tree简介 这是什么？
       
         <span>
           <i class="icon-comment"></i>
-          <a href="http://memphisqrt.github.io/2017/07/06/动态树拓展相关/#disqus_thread"></a>
+          <a href="http://memphisqrt.github.io/2017/07/06/%E5%8A%A8%E6%80%81%E6%A0%91%E6%8B%93%E5%B1%95%E7%9B%B8%E5%85%B3/#disqus_thread" target="_blank" rel="noopener"></a>
         </span>
       
 
@@ -233,7 +224,7 @@ Top-Tree简介 这是什么？
 <p>  （Tarjan论文里还给加了个修饰“自适应”，事实上你问我辛普森和自适应辛普森的区别是什么，我也不知道&gt;.&lt;）</p>
 <h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p> 我们该如何动态维护子树信息？先从一种动态树的解决方式——Link-Cut-Tree(LCT)的复杂度证明说起。</p>
 <p>  首先大家应该都会LCT和树链剖分，不会的还请先不要看这篇文章。</p>
-<p>  以下证明部分参考杨哲的集训队作业<a href="http://wenku.baidu.com/view/75906f160b4e767f5acfcedb" target="_blank" rel="external">《QTREE解法的一些研究》</a>。</p>
+<p>  以下证明部分参考杨哲的集训队作业<a href="http://wenku.baidu.com/view/75906f160b4e767f5acfcedb" target="_blank" rel="noopener">《QTREE解法的一些研究》</a>。</p>
 <h3 id="Link-Cut-Tree的复杂度分析"><a href="#Link-Cut-Tree的复杂度分析" class="headerlink" title="Link-Cut-Tree的复杂度分析"></a>Link-Cut-Tree的复杂度分析</h3><p>  我们知道LCT和树链剖分都有轻重链之分，然而LCT的轻重链是动态变化的，树剖却不是。</p>
 <p>  我们先把一棵树树链剖分，定义轻边为不在重链上的边，重边为在重链上的边。再对LCT做定义，一个节点在重链【此处的重链为LCT的动态重链，和树剖无关】上的直接儿子定义为preferred child，连向该儿子的边定义为preferred edge。</p>
 <p>  在LCT的access操作中，我们只要证明preferred child的更改次数是均摊$O(n\log n)$ 的，就可以<strong>先</strong>证明其复杂度上界为$O(n\log^2 n)$。</p>
@@ -351,7 +342,7 @@ Top-Tree简介 这是什么？
 <p>  expose后将该联通块辅树关键节点所在dfs序接入关键节点父亲所在的主树中，和父联通块主树合并；相对的，<strong>将主树中的关键节点从关键节点父亲的辅树中该父亲节点所代表的异色子联通块dfs序中切除</strong>，成为父联通块辅树的一部分。</p>
 <p>  至此，我们可以发现通过expose及其之后的操作，使得该联通块的一条链完成与父联通块的合并，并且原本的主树变为辅树，辅树变为主树。</p>
 <p>思路大致明朗。</p>
-<p> <br></p>
+<p> <br /></p>
 <p>  所谓链修改操作即为将一个节点到根上的一段进行主树和辅树的相互变换。</p>
 <p>  当然还有很多细节，比如根节点所在联通块要特判之类的。</p>
 <p>复杂度上界$O(n\log^2 n)$</p>
@@ -367,7 +358,7 @@ Top-Tree简介 这是什么？
 
    
   <div class="box-prev-next clearfix">
-    <a class="show pull-left" href="/2017/07/01/非旋转Treap及可持久化-Merge-Split/">
+    <a class="show pull-left" href="/2017/07/01/%E9%9D%9E%E6%97%8B%E8%BD%ACTreap%E5%8F%8A%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96-Merge-Split/">
         <i class="icon icon-angle-left"></i>
     </a>
     <a class="show pull-right" href="/2018/03/31/Smoothed-Analysis-Translation/">
@@ -466,14 +457,14 @@ Top-Tree简介 这是什么？
     
   <section class="disqus-comments">
     <div id="disqus_thread">
-      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
     </div>
   </section>
 
   <script>
     var disqus_shortname = 'Memphis';
     
-    var disqus_url = 'http://yoursite.com/2017/07/06/动态树拓展相关/';
+    var disqus_url = 'http://yoursite.com/2017/07/06/%E5%8A%A8%E6%80%81%E6%A0%91%E6%8B%93%E5%B1%95%E7%9B%B8%E5%85%B3/';
     
     (function(){
       var dsq = document.createElement('script');
